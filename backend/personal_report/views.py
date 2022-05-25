@@ -5,9 +5,10 @@ from django.http import HttpResponse, JsonResponse
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, schema
 import pandas as pd
+from htmldocx import HtmlToDocx
 
 
-# Needs another approach
+
 
 def generate_data():
     graph_1 = pd.read_csv('csv/HBD.Cohort_001_Graph1.csv')
@@ -29,6 +30,8 @@ def report(request):
     #   "text": "New task"
     # }
     data = generate_data()
+    new_parser = HtmlToDocx()
+    new_parser.parse_html_file("csv/pywin32.html", "docx_filename")
 
     return HttpResponse(json.dumps(data), content_type="application/json")
   

@@ -1,0 +1,1336 @@
+"use strict";
+(self["webpackChunkhighcharts"] = self["webpackChunkhighcharts"] || []).push([["main"],{
+
+/***/ 5041:
+/*!**********************************!*\
+  !*** ./src/app/app.component.ts ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "AppComponent": () => (/* binding */ AppComponent)
+/* harmony export */ });
+/* harmony import */ var highcharts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! highcharts */ 5972);
+/* harmony import */ var highcharts__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(highcharts__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var highcharts_highcharts_more__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! highcharts/highcharts-more */ 9249);
+/* harmony import */ var highcharts_highcharts_more__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(highcharts_highcharts_more__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var highcharts_modules_solid_gauge__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! highcharts/modules/solid-gauge */ 4895);
+/* harmony import */ var highcharts_modules_solid_gauge__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(highcharts_modules_solid_gauge__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 3184);
+/* harmony import */ var _components_personal_report_personal_report_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/personal-report/personal-report.component */ 8737);
+/* harmony import */ var _components_charts_charts_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/charts/charts.component */ 4478);
+
+
+
+
+
+
+highcharts_highcharts_more__WEBPACK_IMPORTED_MODULE_1___default()(highcharts__WEBPACK_IMPORTED_MODULE_0__);
+highcharts_modules_solid_gauge__WEBPACK_IMPORTED_MODULE_2___default()(highcharts__WEBPACK_IMPORTED_MODULE_0__);
+class AppComponent {
+}
+AppComponent.ɵfac = function AppComponent_Factory(t) { return new (t || AppComponent)(); };
+AppComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdefineComponent"]({ type: AppComponent, selectors: [["app-root"]], decls: 2, vars: 0, template: function AppComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](0, "app-personal-report")(1, "app-charts");
+    } }, directives: [_components_personal_report_personal_report_component__WEBPACK_IMPORTED_MODULE_3__.PersonalReportComponent, _components_charts_charts_component__WEBPACK_IMPORTED_MODULE_4__.ChartsComponent], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJhcHAuY29tcG9uZW50LnNhc3MifQ== */"] });
+
+
+/***/ }),
+
+/***/ 6747:
+/*!*******************************!*\
+  !*** ./src/app/app.module.ts ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "AppModule": () => (/* binding */ AppModule)
+/* harmony export */ });
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/platform-browser */ 318);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ 587);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common/http */ 8784);
+/* harmony import */ var _fortawesome_angular_fontawesome__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @fortawesome/angular-fontawesome */ 9397);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ 6362);
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app.component */ 5041);
+/* harmony import */ var _components_charts_charts_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/charts/charts.component */ 4478);
+/* harmony import */ var _components_personal_report_personal_report_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/personal-report/personal-report.component */ 8737);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 3184);
+
+
+
+
+
+
+
+
+
+class AppModule {
+}
+AppModule.ɵfac = function AppModule_Factory(t) { return new (t || AppModule)(); };
+AppModule.ɵmod = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineNgModule"]({ type: AppModule, bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_0__.AppComponent] });
+AppModule.ɵinj = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineInjector"]({ providers: [], imports: [[
+            _angular_common__WEBPACK_IMPORTED_MODULE_4__.CommonModule,
+            _angular_platform_browser__WEBPACK_IMPORTED_MODULE_5__.BrowserModule,
+            _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormsModule,
+            _angular_common_http__WEBPACK_IMPORTED_MODULE_7__.HttpClientModule,
+            _fortawesome_angular_fontawesome__WEBPACK_IMPORTED_MODULE_8__.FontAwesomeModule
+        ]] });
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵsetNgModuleScope"](AppModule, { declarations: [_app_component__WEBPACK_IMPORTED_MODULE_0__.AppComponent,
+        _components_charts_charts_component__WEBPACK_IMPORTED_MODULE_1__.ChartsComponent,
+        _components_personal_report_personal_report_component__WEBPACK_IMPORTED_MODULE_2__.PersonalReportComponent], imports: [_angular_common__WEBPACK_IMPORTED_MODULE_4__.CommonModule,
+        _angular_platform_browser__WEBPACK_IMPORTED_MODULE_5__.BrowserModule,
+        _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormsModule,
+        _angular_common_http__WEBPACK_IMPORTED_MODULE_7__.HttpClientModule,
+        _fortawesome_angular_fontawesome__WEBPACK_IMPORTED_MODULE_8__.FontAwesomeModule] }); })();
+
+
+/***/ }),
+
+/***/ 4478:
+/*!*******************************************************!*\
+  !*** ./src/app/components/charts/charts.component.ts ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ChartsComponent": () => (/* binding */ ChartsComponent)
+/* harmony export */ });
+/* harmony import */ var highcharts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! highcharts */ 5972);
+/* harmony import */ var highcharts__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(highcharts__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 3184);
+
+
+class ChartsComponent {
+    constructor() {
+        this.title = 'Highcharts';
+    }
+    getRandomList(min, max, length) {
+        const data = [];
+        for (let i = 0; i < length; i++) {
+            data.push(Math.floor(Math.random() * (max - min + 1) + min));
+        }
+        return data;
+    }
+    getRandomNumber(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+    createChartGauge() {
+        const chart = highcharts__WEBPACK_IMPORTED_MODULE_0__.chart('bar-chart', {
+            chart: {
+                type: 'bar',
+                // add styles
+                backgroundColor: {
+                    linearGradient: [0, 0, 0, 5000],
+                    stops: [
+                        [0, 'rgb(255, 255, 255)'],
+                        [1, 'rgb(240, 240, 255)']
+                    ]
+                },
+                borderWidth: 0,
+                plotBackgroundColor: 'rgba(255, 255, 255, .9)',
+                plotShadow: true,
+                plotBorderWidth: 1
+            },
+            title: {
+                text: 'Bar Chart',
+            },
+            subtitle: {
+                text: 'Bar Chart subtitle'
+            },
+            xAxis: {
+                categories: ['Apples', 'Bananas', 'Oranges']
+            },
+            yAxis: {
+                min: 0,
+                max: 10,
+                tickAmount: 11,
+                labels: {
+                    y: 22, // not sure, but behaives like ~ margin
+                },
+            },
+            series: [{
+                    name: 'Jane',
+                    data: this.getRandomList(1, 10, 3)
+                }, {
+                    name: 'John',
+                    data: this.getRandomList(1, 10, 3)
+                }]
+        });
+    }
+    createLineChart() {
+        var chart = new highcharts__WEBPACK_IMPORTED_MODULE_0__.Chart({
+            chart: {
+                renderTo: 'line-chart', // wich id to follow
+            },
+            xAxis: {
+                type: 'datetime',
+                gridLineWidth: 1 // adds border-width of the inner grid
+            },
+            yAxis: {
+                labels: {
+                    formatter: function () {
+                        return this.value + ' %';
+                    }
+                },
+            },
+            title: {
+                text: 'Multiline Chart'
+            },
+            series: [{
+                    data: this.getRandomList(25, 30, 8),
+                    type: 'line',
+                    pointStart: Date.UTC(2022, 4, 5),
+                    pointInterval: 24 * 3600 * 1000,
+                }, {
+                    data: this.getRandomList(25, 30, 8),
+                    type: 'line',
+                    color: '#F50',
+                    pointStart: Date.UTC(2022, 4, 5),
+                    pointInterval: 24 * 3600 * 1000,
+                }, {
+                    data: this.getRandomList(25, 30, 8),
+                    type: 'line',
+                    pointStart: Date.UTC(2022, 4, 5),
+                    pointInterval: 24 * 3600 * 1000,
+                }]
+        });
+    }
+    createColumnChart() {
+        var chart = new highcharts__WEBPACK_IMPORTED_MODULE_0__.Chart({
+            chart: {
+                renderTo: 'column',
+                type: 'column'
+            },
+            title: {
+                text: 'Column Chart'
+            },
+            xAxis: {
+                title: {
+                    text: 'xAxis'
+                },
+                tickInterval: 1
+            },
+            yAxis: {
+                title: {
+                    text: 'yAxis'
+                },
+                labels: {
+                    formatter: function () {
+                        return this.value + ' %';
+                    }
+                },
+                tickInterval: 5
+            },
+            series: [{
+                    name: 'Jane',
+                    type: 'column',
+                    data: this.getRandomList(25, 30, 8)
+                }, {
+                    name: 'John',
+                    type: 'column',
+                    data: this.getRandomList(25, 30, 8)
+                }],
+        });
+    }
+    createBubbleChart() {
+        var chart = new highcharts__WEBPACK_IMPORTED_MODULE_0__.Chart({
+            chart: {
+                type: 'bubble',
+                renderTo: 'bubble',
+                plotBorderWidth: 1,
+                zoomType: 'xy'
+            },
+            legend: {
+                align: 'left',
+                verticalAlign: 'top',
+                layout: 'vertical',
+                x: 0,
+                y: 100,
+                bubbleLegend: {
+                    enabled: true,
+                    minSize: 20,
+                    maxSize: 60,
+                    ranges: [{
+                            value: 14
+                        }, {
+                            value: 89
+                        }]
+                }
+            },
+            tooltip: {
+                useHTML: true,
+                headerFormat: '<table>',
+                pointFormat: '<tr><th colspan="2"><h3>{point.country}</h3></th></tr>' +
+                    '<tr><th>Fat intake:</th><td>{point.x}g</td></tr>' +
+                    '<tr><th>Sugar intake:</th><td>{point.y}g</td></tr>' +
+                    '<tr><th>Obesity (adults):</th><td>{point.z}%</td></tr>',
+                footerFormat: '</table>',
+                followPointer: true
+            },
+            plotOptions: {
+                series: {
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point.name}'
+                    }
+                }
+            },
+            series: [{
+                    type: 'bubble',
+                    minSize: 40,
+                    maxSize: 80,
+                    data: [
+                        { x: 95, y: 95, z: 13, name: 'BE' },
+                        { x: 86.5, y: 102.9, z: 14.7, name: 'DE' },
+                        { x: 80.8, y: 91.5, z: 15.8, name: 'FI' },
+                        { x: 80.4, y: 102.5, z: 12, name: 'NL' },
+                        { x: 80.3, y: 86.1, z: 11.8, name: 'SE' },
+                        { x: 78.4, y: 70.1, z: 16.6, name: 'ES' },
+                        { x: 74.2, y: 68.5, z: 14.5, name: 'FR' },
+                    ]
+                }]
+        });
+    }
+    createSolidgauge() {
+        const chart = highcharts__WEBPACK_IMPORTED_MODULE_0__.chart('chart-gauge', {
+            chart: {
+                type: 'solidgauge',
+                width: 200
+            },
+            title: {
+                text: 'Gauge Chart',
+            },
+            credits: {
+                enabled: false,
+            },
+            pane: {
+                startAngle: -90,
+                endAngle: 90,
+                center: ['50%', '85%'],
+                size: '160%',
+                background: {
+                    innerRadius: '60%',
+                    outerRadius: '100%',
+                    shape: 'arc',
+                },
+            },
+            yAxis: {
+                min: 0,
+                max: 100,
+                stops: [
+                    [0.1, '#55BF3B'],
+                    [0.5, '#DDDF0D'],
+                    [0.9, '#DF5353'], // red
+                ],
+                minorTickInterval: null,
+                tickAmount: 2,
+                labels: {
+                    y: 16,
+                },
+            },
+            plotOptions: {
+                solidgauge: {
+                    dataLabels: {
+                        y: -25,
+                        borderWidth: 0,
+                        useHTML: true,
+                    },
+                },
+            },
+            tooltip: {
+                enabled: false,
+            },
+            series: [{
+                    name: null,
+                    data: [this.getRandomNumber(0, 100)],
+                    dataLabels: {
+                        format: '<div style="text-align: center"><span style="font-size: 1.25rem">{y}</span></div>',
+                    },
+                }],
+        });
+    }
+    createChartPie() {
+        let date = new Date();
+        const data = [];
+        for (let i = 0; i < 5; i++) {
+            date.setDate(new Date().getDate() + i);
+            data.push({
+                name: `${date.getDate()}/${date.getMonth() + 1}`,
+                y: this.getRandomNumber(0, 1000),
+            });
+        }
+        const chart = highcharts__WEBPACK_IMPORTED_MODULE_0__.chart('chart-pie', {
+            chart: {
+                type: 'pie',
+            },
+            title: {
+                text: 'Pie Chart',
+            },
+            credits: {
+                enabled: false,
+            },
+            tooltip: {
+                headerFormat: `<span class="mb-2">Date: {point.key}</span><br>`,
+                pointFormat: '<span>Amount: {point.y}</span>',
+                useHTML: true,
+            },
+            series: [{
+                    name: null,
+                    innerSize: '50%',
+                    data,
+                }],
+        });
+    }
+    ngOnInit() {
+        this.createChartGauge();
+        this.createLineChart();
+        this.createColumnChart();
+        this.createBubbleChart();
+        this.createChartGauge();
+        this.createChartPie();
+        this.createSolidgauge();
+    }
+}
+ChartsComponent.ɵfac = function ChartsComponent_Factory(t) { return new (t || ChartsComponent)(); };
+ChartsComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({ type: ChartsComponent, selectors: [["app-charts"]], decls: 15, vars: 0, consts: [[1, "container", "mx-auto", "max-w-screen-lg", 2, "margin-bottom", "200px"], [1, "flex"], [1, "mt-20", "w-1/2"], ["id", "bar-chart"], ["id", "column"], [1, "mt-20"], ["id", "line-chart"], ["id", "bubble"], [1, "mt-20", "w-11/12"], ["id", "chart-pie"], ["id", "chart-gauge"]], template: function ChartsComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 0)(1, "div", 1)(2, "div", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](3, "div", 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](4, "div", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](5, "div", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](6, "div", 5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](7, "div", 6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](8, "div", 5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](9, "div", 7);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](10, "div", 1)(11, "div", 8);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](12, "div", 9);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](13, "div", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](14, "div", 10);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()()();
+    } }, styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJjaGFydHMuY29tcG9uZW50LnNhc3MifQ== */"] });
+
+
+/***/ }),
+
+/***/ 8737:
+/*!*************************************************************************!*\
+  !*** ./src/app/components/personal-report/personal-report.component.ts ***!
+  \*************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PersonalReportComponent": () => (/* binding */ PersonalReportComponent)
+/* harmony export */ });
+/* harmony import */ var highcharts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! highcharts */ 5972);
+/* harmony import */ var highcharts__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(highcharts__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var highcharts_modules_bullet__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! highcharts/modules/bullet */ 8024);
+/* harmony import */ var highcharts_modules_bullet__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(highcharts_modules_bullet__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ 655);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 3184);
+/* harmony import */ var _servises_personal_report_data_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../servises/personal-report-data.service */ 7884);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common */ 6362);
+
+// import * as Bullet from 'highcharts/modules/bullet';
+
+
+
+
+
+const _c0 = function (a0) { return { "margin-left": a0 }; };
+class PersonalReportComponent {
+    constructor(personalReportDataService) {
+        this.personalReportDataService = personalReportDataService;
+        this.faCaretDown = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__.faCaretDown;
+        this.y = Math.floor(Math.random() * 100);
+        this.target = Math.floor(Math.random() * 100);
+    }
+    getRandomList(min, max, length) {
+        const data = [];
+        for (let i = 0; i < length; i++) {
+            data.push(Math.floor(Math.random() * (max - min + 1) + min));
+        }
+        return data;
+    }
+    generateSeries(len = 10) {
+        this.values = this.getRandomList(30, 100, len);
+        var color = '#74c26e';
+        var data = [];
+        var num = 0;
+        for (let value of this.values) {
+            if (value < 40) {
+                color = '#f2ce72';
+            }
+            else if (75 > value && value > 40) {
+                color = '#b7e08b';
+            }
+            else {
+                color = '#74c26e';
+            }
+            data.push({
+                // x: this.values.indexOf(value),
+                x: num,
+                y: value,
+                color: color,
+                name: "Colaboration & Teamwork"
+            });
+            num += 1;
+        }
+        return data;
+    }
+    personalChart2() {
+        var chart = highcharts__WEBPACK_IMPORTED_MODULE_0__.chart('chart2', {
+            chart: {
+                type: 'column',
+                // width: 800,
+                height: 550,
+            },
+            title: {
+                text: 'chart2'
+            },
+            xAxis: [
+                {
+                    categories: [
+                        'Self-Awareness', 'Communication', 'Effective Meetings',
+                        'Self-Awareness', 'How to Say No', 'Effective Meetings',
+                        'Self-Awareness', 'Collaboration & Teamwork', 'Effective Meetings', 'Effective Meetings',
+                    ],
+                    alternateGridColor: '#fff2e8',
+                    labels: {
+                        y: 42,
+                        style: {
+                            fontSize: 11,
+                            color: 'grey',
+                            width: '80px'
+                        },
+                        overflow: "allow"
+                    },
+                    offset: 0,
+                },
+                {
+                    categories: [
+                        'Pre | Post', 'Pre | Post', 'Pre  Post',
+                        'Pre  Post', 'Pre  Post', 'Pre  Post',
+                        'Pre  Post', 'Pre  Post', 'Pre  Post', 'Pre  Post'
+                    ],
+                    linkedTo: 0,
+                    opposite: false,
+                    labels: {
+                        style: {
+                            fontSize: 11,
+                            color: 'grey'
+                        }
+                    },
+                    offset: 0
+                },
+            ],
+            yAxis: {
+                // allowDecimals: false,
+                min: 0,
+                max: 5,
+                title: {
+                    text: ''
+                },
+                tickInterval: 1,
+            },
+            legend: { enabled: false },
+            credits: {
+                enabled: false
+            },
+            plotOptions: {
+                column: {
+                    stacking: 'normal'
+                },
+                series: {
+                    pointPadding: 0.2,
+                }
+            },
+            series: [
+                {
+                    name: 'Gap to goal',
+                    data: this.getRandomList(1, 1, 10),
+                    stack: 'male',
+                    color: '#e3bc49'
+                }, {
+                    name: 'Current Rating',
+                    data: this.getRandomList(2, 4, 10),
+                    stack: 'male',
+                    color: '#bab9b6'
+                },
+                {
+                    name: 'Gap to goal',
+                    data: this.getRandomList(1, 2, 10),
+                    stack: 'female',
+                    color: '#e3bc49'
+                },
+                {
+                    name: 'Increase in Rating',
+                    data: this.getRandomList(2, 4, 10),
+                    stack: 'female',
+                    color: '#7cba73'
+                },
+            ]
+        });
+    }
+    getBulletGraph() {
+        highcharts_modules_bullet__WEBPACK_IMPORTED_MODULE_1___default()(highcharts__WEBPACK_IMPORTED_MODULE_0__);
+        highcharts__WEBPACK_IMPORTED_MODULE_0__.chart('bullet-graph1', {
+            chart: {
+                height: 93,
+                width: 410,
+                inverted: true,
+                marginLeft: 135,
+                type: 'bullet',
+                marginTop: 40,
+                innerHeight: 10
+            },
+            title: {
+                text: null
+            },
+            xAxis: {
+                categories: ['']
+            },
+            yAxis: {
+                min: 0,
+                max: 100,
+                tickInterval: 0,
+                gridLineWidth: 0,
+                plotBands: [{
+                        from: 0,
+                        to: 40,
+                        color: '#f09b46'
+                    }, {
+                        from: 40,
+                        to: 75,
+                        color: '#b7e08b'
+                    }, {
+                        from: 75,
+                        to: 100,
+                        color: '#74c26e'
+                    }],
+                title: null,
+                labels: {
+                    format: "{value}%",
+                    overflow: 'justify'
+                },
+            },
+            legend: { enabled: false },
+            plotOptions: {
+                series: {
+                    pointPadding: 0.25,
+                    borderWidth: 0,
+                    color: '#000',
+                    targetOptions: {
+                        width: '200%'
+                    }
+                }
+            },
+            credits: {
+                enabled: false
+            },
+            exporting: {
+                enabled: false
+            },
+            series: [{
+                    data: [{
+                            y: this.y,
+                            target: this.target
+                        }],
+                }],
+            tooltip: {
+                pointFormat: '<b>{point.y}</b> (with target at {point.target})'
+            }
+        });
+        console.log('y:', this.y, 'Target:', this.target);
+    }
+    getNegativeStackBar2() {
+        console.log(this.getRandomList(65, 80, 30));
+        var sub_categories = [
+            'What is communication, why its important', 'What is professionalism and how does it connect to high performance', 'How to communicate', 'What is professionalism and how does it connect to high performance', 'Why is self-awareness critical for every professional',
+            'What is communication, why its important', 'What is professionalism and how does it connect to high performance', 'How to communicate', 'What is professionalism and how does it connect to high performance', 'Why is self-awareness critical for every professional',
+            'What is communication, why its important', 'What is professionalism and how does it connect to high performance', 'How to communicate', 'What is professionalism and how does it connect to high performance', 'Why is self-awareness critical for every professional',
+            'What is communication, why its important', 'What is professionalism and how does it connect to high performance', 'How to communicate', 'What is professionalism and how does it connect to high performance', 'Why is self-awareness critical for every professional',
+            'What is communication, why its important', 'What is professionalism and how does it connect to high performance', 'How to communicate', 'What is professionalism and how does it connect to high performance', 'Why is self-awareness critical for every professional',
+            'What is communication, why its important', 'What is professionalism and how does it connect to high performance', 'How to communicate', 'What is professionalism and how does it connect to high performance', 'Why is self-awareness critical for every professional',
+        ];
+        var categories = [
+            '', 'How to Sell', '', '', 'Effective Meetings', '', '', 'Professionalism', '', '', 'Question+X', '', '', 'How to Sell', '',
+            '', 'How to Sell', '', '', 'Effective Meetings', '', '', 'Professionalism', '', '', 'How to Sell', '', '', 'Question+X', '', ''
+        ];
+        var chart = new highcharts__WEBPACK_IMPORTED_MODULE_0__.Chart({
+            chart: {
+                renderTo: 'negative-stack2',
+                height: 1200,
+                style: {
+                    fontFamily: 'Arial'
+                },
+                zoomType: "xy",
+                marginLeft: 450,
+                type: "column",
+                inverted: true,
+            },
+            title: {
+                text: "getNegativeStackBar2"
+            },
+            xAxis: [
+                {
+                    // alternateGridColor: '#fff2e8',
+                    categories: sub_categories,
+                    labels: {
+                        align: "right",
+                        x: 130,
+                        padding: 80,
+                        y: 3,
+                        style: {
+                            fontSize: 13,
+                            color: 'grey'
+                        }
+                    },
+                    offset: 150,
+                },
+                {
+                    categories: categories,
+                    linkedTo: 0,
+                    opposite: false,
+                    labels: {
+                        x: -20,
+                        padding: 0.0,
+                        y: 0,
+                        style: {
+                            fontSize: 14,
+                            fontWeight: 'bold'
+                        }
+                    },
+                    offset: 300
+                },
+            ],
+            yAxis: {
+                min: 0,
+                max: 100,
+                labels: {
+                    format: "{value}%",
+                    overflow: 'justify'
+                },
+            },
+            plotOptions: {
+                series: {
+                    pointWidth: 17,
+                    shadow: false,
+                    minPointLength: 14,
+                    borderWidth: 0
+                },
+                column: {
+                    stacking: 'normal'
+                }
+            },
+            legend: { enabled: false },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                    data: this.generateSeries(30)
+                },
+                {
+                    data: this.getRandomList(65, 80, 30),
+                    type: 'spline',
+                    color: '#c9c5b7'
+                },
+            ],
+        });
+    }
+    getNegativeStackBar() {
+        var categories = [
+            'Question+X', 'Question+X', 'Question+X', 'Question+X', 'Question+X',
+            'Question+X', 'Question+X', 'Question+X', 'Question+X', 'Question+X',
+            'Question+X', 'Question+X', 'Question+X', 'Question+X', 'Question+X',
+            'Question+X', 'Question+X', 'Question4', 'Question3', 'Question2', 'Question+X is very very long and takes even two lines',
+        ];
+        var chart = new highcharts__WEBPACK_IMPORTED_MODULE_0__.Chart({
+            chart: {
+                renderTo: 'negative-stack',
+                type: 'bar',
+                marginLeft: 450,
+            },
+            title: {
+                text: 'getNegativeStackBar'
+            },
+            accessibility: {
+                point: {
+                    valueDescriptionFormat: '{index}. Age {xDescription}, {value}%.'
+                }
+            },
+            xAxis: [{
+                    categories: categories,
+                    reversed: false,
+                    labels: {
+                        step: 1
+                    },
+                    accessibility: {
+                        description: 'Age (male)'
+                    }
+                }, {
+                    opposite: false,
+                    reversed: false,
+                    categories: categories,
+                    linkedTo: 0,
+                    labels: {
+                        step: 6
+                    },
+                    accessibility: {
+                        description: 'Age (female)'
+                    }
+                }],
+            yAxis: {
+                min: 0,
+                max: 5,
+                title: {
+                    text: null
+                },
+                labels: {
+                    distance: -225
+                }
+            },
+            plotOptions: {
+                series: {
+                    stacking: 'normal'
+                }
+            },
+            series: [
+                //   {
+                //   name: 'Question',
+                //   // color: 'white',
+                //   data: [
+                //     'text', 'text', 'text', 'text',
+                //     'text', 'text', 'text', 'text',
+                //     'text', 'text', 'text', 'text',
+                //     'text', 'text', 'text', 'text',
+                //     'text', 'text', 'text', 'text',
+                //     // -3.0,
+                //   ]
+                // },
+                {
+                    name: 'Value',
+                    data: [
+                        2.1, 2.0, 2.1, 2.3, 2.6,
+                        2.9, 3.2, 3.1, 2.9, 3.4,
+                        4.3, 4.0, 3.5, 2.9, 2.5,
+                        2.7, 2.2, 1.1, 1.6, 1.2,
+                        2.7, 2.2, 1.1, 1.6, 2.2,
+                    ]
+                }
+            ]
+        });
+    }
+    createChartGauge() {
+        var chart = new highcharts__WEBPACK_IMPORTED_MODULE_0__.Chart({
+            chart: {
+                renderTo: 'chart2_02',
+                type: 'column',
+                width: 300
+            },
+            title: {
+                text: 'Stacked column chart'
+            },
+            xAxis: {
+                categories: ['pre', 'post', 'pre', 'post', 'pre', 'post',]
+            },
+            yAxis: {
+                min: 1,
+                max: 5,
+                tickInterval: 1,
+                title: {
+                    text: 'Total fruit consumption'
+                },
+                stackLabels: {
+                    enabled: true,
+                    style: {
+                        fontWeight: 'bold',
+                    }
+                }
+            },
+            legend: {
+                align: 'right',
+                x: -30,
+                verticalAlign: 'top',
+                y: 25,
+                floating: true,
+                borderColor: '#CCC',
+                borderWidth: 1,
+                shadow: false
+            },
+            tooltip: {
+                headerFormat: '<b>{point.x}</b><br/>',
+                pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+            },
+            plotOptions: {
+                column: {
+                    stacking: 'normal',
+                    pointPadding: 0.2,
+                    dataLabels: {
+                        enabled: true
+                    }
+                }
+            },
+            series: [
+                {
+                    name: 'Name1',
+                    data: [{
+                            x: 0,
+                            y: 1,
+                        }, {
+                            x: 1,
+                            y: 2,
+                            name: 'custom name',
+                        }, {
+                            x: 2,
+                            y: 1
+                        }, {
+                            x: 3,
+                            y: 1
+                        }]
+                }, {
+                    name: 'Name2',
+                    data: [{
+                            x: 0,
+                            y: 3,
+                            color: 'grey',
+                        }, {
+                            x: 1,
+                            y: 3,
+                            color: 'green'
+                        }, {
+                            x: 2,
+                            y: 3
+                        }, {
+                            x: 3,
+                            y: 3,
+                            color: 'green',
+                        }]
+                },
+            ]
+        });
+    }
+    getPersonalScore3() {
+        var data = this.getRandomList(65, 80, 10);
+        var chart = highcharts__WEBPACK_IMPORTED_MODULE_0__.chart('box3', {
+            chart: {
+                type: 'column',
+                height: 600
+            },
+            title: {
+                text: 'getPersonalScore3'
+            },
+            accessibility: {
+                announceNewData: {
+                    enabled: true
+                }
+            },
+            xAxis: [
+                {
+                    categories: data,
+                    labels: {
+                        format: '{value}%',
+                        y: -5,
+                        style: {
+                            fontSize: 12,
+                            fontWeight: 'bold',
+                            color: 'black'
+                        },
+                        overflow: "allow"
+                    },
+                    offset: 0,
+                },
+                {
+                    categories: [
+                        'Self-Awareness', 'Communication', 'Effective Meetings',
+                        'Self-Awareness', 'How to Say No', 'Effective Meetings',
+                        'Self-Awareness', 'Collaboration & Teamwork', 'Effective Meetings', 'Effective Meetings',
+                    ],
+                    linkedTo: 0,
+                    opposite: false,
+                    labels: {
+                        style: {
+                            fontSize: 11,
+                            color: 'grey'
+                        }
+                    },
+                    offset: 0
+                },
+            ],
+            yAxis: {
+                min: 0,
+                max: 100,
+                tickInterval: 10,
+                title: {
+                    text: 'Percent ( % )'
+                },
+            },
+            legend: { enabled: false },
+            credits: {
+                enabled: false
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+            },
+            series: [
+                {
+                    name: "Name",
+                    colorByPoint: true,
+                    data: this.generateSeries(),
+                },
+                {
+                    data: data,
+                    type: 'spline',
+                    color: '#c9c5b7',
+                },
+            ],
+        });
+    }
+    getPersonalScore() {
+        var chart = highcharts__WEBPACK_IMPORTED_MODULE_0__.chart('box', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'getPersonalScore'
+            },
+            xAxis: {
+                labels: {
+                    style: {
+                        fontSize: '8px',
+                        color: 'grey'
+                    }
+                },
+                categories: [
+                    "Self-Awareness",
+                    "sa",
+                    "cmm",
+                    "tm",
+                    "hts",
+                    "Ho to Say NO",
+                    "em",
+                    "cs",
+                    "pa",
+                    "pr",
+                    "Colaboration & Teamwork"
+                ],
+                crosshair: true
+            },
+            yAxis: {
+                min: 0,
+                max: 100,
+                title: {
+                    text: 'Rainfall (mm)'
+                },
+                tickInterval: 10
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f} %</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            scrollbar: {
+                enabled: true
+            },
+            series: [{
+                    color: '#54964d',
+                    name: 'Above 75%',
+                    data: this.generateSeries()
+                },]
+        });
+    }
+    getPersonalScore2() {
+        var chart = highcharts__WEBPACK_IMPORTED_MODULE_0__.chart('box2', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'getPersonalScore2'
+            },
+            xAxis: {
+                labels: {
+                    style: {
+                        fontSize: '8px',
+                        color: 'grey'
+                    }
+                },
+                categories: [
+                    "Self-Awareness",
+                    "sa",
+                    "cmm",
+                    "tm",
+                    "hts",
+                    "Ho to Say NO",
+                    "em",
+                    "cs",
+                    "pa",
+                    "pr",
+                    "Colaboration & Teamwork"
+                ],
+                crosshair: true
+            },
+            yAxis: {
+                min: 0,
+                max: 100,
+                title: {
+                    text: 'Rainfall (mm)'
+                },
+                tickInterval: 10
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f} %</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.0,
+                    borderWidth: 0
+                }
+            },
+            scrollbar: {
+                enabled: true
+            },
+            series: [{
+                    color: '#54964d',
+                    name: 'Above 75%',
+                    data: [{
+                            x: 0,
+                            y: 80
+                        }, {
+                            x: 2,
+                            y: 95
+                        }, {
+                            x: 3,
+                            y: 93
+                        }, {
+                            x: 4,
+                            y: 95
+                        }]
+                },
+                {
+                    color: '#f50',
+                    name: '65%',
+                    data: [{
+                            x: 1,
+                            y: 90
+                        }, {
+                            x: 5,
+                            y: 95
+                        }, {
+                            x: 6,
+                            y: 93
+                        }]
+                },
+            ]
+        });
+    }
+    //NOT WIRKING
+    getPersonalScore1() {
+        var chart = highcharts__WEBPACK_IMPORTED_MODULE_0__.chart('bullet', {
+            chart: {
+                type: 'bullet',
+                width: 1200
+            },
+            series: [{
+                    type: 'bullet',
+                    data: [{
+                            y: 20,
+                            target: 50 // The target value of a point
+                        }],
+                    targetOptions: {
+                        width: '140%',
+                        height: 3,
+                        borderWidth: 0,
+                        borderColor: 'black',
+                        color: 'black' // The color of the target
+                    }
+                }]
+        });
+    }
+    ngOnInit() {
+        this.getBulletGraph();
+        this.getNegativeStackBar2();
+        this.getNegativeStackBar();
+        this.createChartGauge();
+        this.personalChart2();
+        this.getPersonalScore3();
+        this.getPersonalScore2();
+        this.getPersonalScore();
+        this.getPersonalScore1();
+        this.personalReportDataService.getTasks().subscribe((learner) => this.learner = learner);
+    }
+}
+PersonalReportComponent.ɵfac = function PersonalReportComponent_Factory(t) { return new (t || PersonalReportComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](_servises_personal_report_data_service__WEBPACK_IMPORTED_MODULE_2__.PersonalReportDataService)); };
+PersonalReportComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdefineComponent"]({ type: PersonalReportComponent, selectors: [["app-personal-report"]], decls: 38, vars: 6, consts: [[1, "charts"], [1, "legend", "flex"], [1, "dot"], [1, "flex"], [1, "line"], ["id", "chart2"], ["id", "box3"], [1, "bullet-block"], [1, "flex", "user-score", 3, "ngStyle"], [1, ""], [1, "arrow-down"], [1, "flex", "cohort-av", 3, "ngStyle"], [1, "cohort-av"], [1, "arrow-up"], ["id", "bullet-graph1"], ["id", "negative-stack2"], ["id", "negative-stack"], ["id", "chart2_02"], ["id", "box"], ["id", "box2"], ["id", "personal-score"], ["id", "column"]], template: function PersonalReportComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "div", 0)(1, "div", 1)(2, "p");
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](3, "span", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](4, "Above 75%");
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](5, "p");
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](6, "span", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](7, "Above 40%");
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](8, "p");
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](9, "span", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](10, "Below 40%");
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](11, "div", 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](12, "span", 4)(13, "span", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](14, "p");
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](15, "Cohort Average");
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]()();
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](16, "div", 5)(17, "div", 6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](18, "div", 7)(19, "div", 8)(20, "p", 9);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](21, "Your score");
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](22, "i", 10);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](23, "div", 11)(24, "p", 12);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](25, "Cohort Avarage");
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](26, "i", 13);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](27, "div", 14);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](28, "div", 15)(29, "div", 16);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](30, "div", 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](31, "div", 17)(32, "div", 5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](33, "div", 6)(34, "div", 18)(35, "div", 19)(36, "div", 20)(37, "div", 21);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
+    } if (rf & 2) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](19);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("ngStyle", _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpureFunction1"](2, _c0, 105 + ctx.y * 2.65 + "px"));
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("ngStyle", _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵpureFunction1"](4, _c0, 85 + ctx.target * 2.65 + "px"));
+    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_5__.NgStyle], styles: [".charts[_ngcontent-%COMP%] {\n  width: 900px;\n  margin: auto;\n}\n\n.flex[_ngcontent-%COMP%] {\n  display: flex;\n}\n\n.user-score[_ngcontent-%COMP%], .cohort-av[_ngcontent-%COMP%] {\n  font-weight: bold;\n  font-size: 12px;\n  Z-Index: 1;\n}\n\n.user-score[_ngcontent-%COMP%] {\n  margin-left: 370px;\n  position: relative;\n  top: 60px;\n}\n\n.cohort-av[_ngcontent-%COMP%] {\n  position: relative;\n  top: 45px;\n  color: grey;\n}\n\n.arrow-down[_ngcontent-%COMP%], .arrow-up[_ngcontent-%COMP%] {\n  width: 0;\n  height: 0;\n  border-left: 6px solid transparent;\n  border-right: 6px solid transparent;\n  Z-Index: 1;\n  position: relative;\n}\n\n.arrow-up[_ngcontent-%COMP%] {\n  border-bottom: 13px solid grey;\n  top: 30px;\n  margin-left: -45px;\n}\n\n.arrow-down[_ngcontent-%COMP%] {\n  border-top: 13px solid #000;\n  margin-top: 18px;\n  margin-left: -35px;\n}\n\n.dot[_ngcontent-%COMP%] {\n  height: 12px;\n  width: 12px;\n  background-color: #bbb;\n  border-radius: 50%;\n  display: inline-block;\n}\n\n.line[_ngcontent-%COMP%] {\n  width: 20px;\n  border-bottom: 3px solid grey;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInBlcnNvbmFsLXJlcG9ydC5jb21wb25lbnQuc2FzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLFlBQUE7RUFDQSxZQUFBO0FBQ0Y7O0FBQ0E7RUFDRSxhQUFBO0FBRUY7O0FBRUE7RUFDRSxpQkFBQTtFQUNBLGVBQUE7RUFDQSxVQUFBO0FBQ0Y7O0FBRUE7RUFDRSxrQkFBQTtFQUNBLGtCQUFBO0VBQ0EsU0FBQTtBQUNGOztBQUNBO0VBQ0Usa0JBQUE7RUFDQSxTQUFBO0VBQ0EsV0FBQTtBQUVGOztBQUVBO0VBQ0UsUUFBQTtFQUNBLFNBQUE7RUFDQSxrQ0FBQTtFQUNBLG1DQUFBO0VBQ0EsVUFBQTtFQUNBLGtCQUFBO0FBQ0Y7O0FBQ0E7RUFDRSw4QkFBQTtFQUNBLFNBQUE7RUFDQSxrQkFBQTtBQUVGOztBQUFBO0VBQ0UsMkJBQUE7RUFDQSxnQkFBQTtFQUNBLGtCQUFBO0FBR0Y7O0FBQUE7RUFDRSxZQUFBO0VBQ0EsV0FBQTtFQUNBLHNCQUFBO0VBQ0Esa0JBQUE7RUFDQSxxQkFBQTtBQUdGOztBQURBO0VBQ0UsV0FBQTtFQUNBLDZCQUFBO0FBSUYiLCJmaWxlIjoicGVyc29uYWwtcmVwb3J0LmNvbXBvbmVudC5zYXNzIiwic291cmNlc0NvbnRlbnQiOlsiLmNoYXJ0c1xyXG4gIHdpZHRoOjkwMHB4XHJcbiAgbWFyZ2luOiBhdXRvXHJcblxyXG4uZmxleFxyXG4gIGRpc3BsYXk6IGZsZXhcclxuXHJcblxyXG5cclxuLnVzZXItc2NvcmUsIC5jb2hvcnQtYXZcclxuICBmb250LXdlaWdodDogYm9sZFxyXG4gIGZvbnQtc2l6ZTogMTJweFxyXG4gIFotSW5kZXg6IDFcclxuXHJcblxyXG4udXNlci1zY29yZVxyXG4gIG1hcmdpbi1sZWZ0OiAzNzBweCAgICAgIC8vMzcwID09PSAxMDAlICAgIDEwNVBYID09PTElXHJcbiAgcG9zaXRpb246IHJlbGF0aXZlXHJcbiAgdG9wOiA2MHB4XHJcblxyXG4uY29ob3J0LWF2XHJcbiAgcG9zaXRpb246IHJlbGF0aXZlXHJcbiAgdG9wOiA0NXB4XHJcbiAgY29sb3I6IGdyZXlcclxuXHJcblxyXG5cclxuLmFycm93LWRvd24sIC5hcnJvdy11cFxyXG4gIHdpZHRoOiAwXHJcbiAgaGVpZ2h0OiAwXHJcbiAgYm9yZGVyLWxlZnQ6IDZweCBzb2xpZCB0cmFuc3BhcmVudFxyXG4gIGJvcmRlci1yaWdodDogNnB4IHNvbGlkIHRyYW5zcGFyZW50XHJcbiAgWi1JbmRleDogMVxyXG4gIHBvc2l0aW9uOiByZWxhdGl2ZVxyXG5cclxuLmFycm93LXVwXHJcbiAgYm9yZGVyLWJvdHRvbTogMTNweCBzb2xpZCBncmV5XHJcbiAgdG9wOiAzMHB4XHJcbiAgbWFyZ2luLWxlZnQ6IC00NXB4XHJcblxyXG4uYXJyb3ctZG93blxyXG4gIGJvcmRlci10b3A6IDEzcHggc29saWQgIzAwMFxyXG4gIG1hcmdpbi10b3A6IDE4cHhcclxuICBtYXJnaW4tbGVmdDogLTM1cHhcclxuXHJcblxyXG4uZG90XHJcbiAgaGVpZ2h0OiAxMnB4XHJcbiAgd2lkdGg6IDEycHhcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiAjYmJiXHJcbiAgYm9yZGVyLXJhZGl1czogNTAlXHJcbiAgZGlzcGxheTogaW5saW5lLWJsb2NrXHJcblxyXG4ubGluZVxyXG4gIHdpZHRoOiAyMHB4XHJcbiAgYm9yZGVyLWJvdHRvbTogM3B4IHNvbGlkIGdyZXlcclxuXHJcbiJdfQ== */"] });
+
+
+/***/ }),
+
+/***/ 7884:
+/*!**********************************************************!*\
+  !*** ./src/app/servises/personal-report-data.service.ts ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PersonalReportDataService": () => (/* binding */ PersonalReportDataService)
+/* harmony export */ });
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/common/http */ 8784);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 3184);
+
+
+
+const HttpOptions = {
+    headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_0__.HttpHeaders({
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT',
+    })
+};
+class PersonalReportDataService {
+    constructor(http) {
+        this.http = http;
+        // private apiUrl = 'http://localhost:8000'
+        // constructor(private http: HttpClient) { }
+        // getPersonalReportFromCSV(): Observable<any> {
+        //   return this.http.get(this.apiUrl)
+        // }
+        this.apiUrl = 'http://localhost:3000/learner';
+    }
+    getTasks() {
+        return this.http.get(this.apiUrl);
+    }
+}
+PersonalReportDataService.ɵfac = function PersonalReportDataService_Factory(t) { return new (t || PersonalReportDataService)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_0__.HttpClient)); };
+PersonalReportDataService.ɵprov = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjectable"]({ token: PersonalReportDataService, factory: PersonalReportDataService.ɵfac, providedIn: 'root' });
+
+
+/***/ }),
+
+/***/ 2340:
+/*!*****************************************!*\
+  !*** ./src/environments/environment.ts ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "environment": () => (/* binding */ environment)
+/* harmony export */ });
+// This file can be replaced during build by using the `fileReplacements` array.
+// `ng build` replaces `environment.ts` with `environment.prod.ts`.
+// The list of file replacements can be found in `angular.json`.
+const environment = {
+    production: false
+};
+/*
+ * For easier debugging in development mode, you can import the following file
+ * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
+ *
+ * This import should be commented out in production mode because it will have a negative impact
+ * on performance if an error is thrown.
+ */
+// import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
+
+
+/***/ }),
+
+/***/ 4431:
+/*!*********************!*\
+  !*** ./src/main.ts ***!
+  \*********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/platform-browser */ 318);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 3184);
+/* harmony import */ var _app_app_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app/app.module */ 6747);
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./environments/environment */ 2340);
+
+
+
+
+if (_environments_environment__WEBPACK_IMPORTED_MODULE_1__.environment.production) {
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.enableProdMode)();
+}
+_angular_platform_browser__WEBPACK_IMPORTED_MODULE_3__.platformBrowser().bootstrapModule(_app_app_module__WEBPACK_IMPORTED_MODULE_0__.AppModule)
+    .catch(err => console.error(err));
+
+
+/***/ })
+
+},
+/******/ __webpack_require__ => { // webpackRuntimeModules
+/******/ var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
+/******/ __webpack_require__.O(0, ["vendor"], () => (__webpack_exec__(8202), __webpack_exec__(4431)));
+/******/ var __webpack_exports__ = __webpack_require__.O();
+/******/ }
+]);
+//# sourceMappingURL=main.js.map
