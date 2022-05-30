@@ -5,39 +5,52 @@
 .flex
   display: flex
 
-.user-score
-  margin-left: 700px
-  position: relative
-  top: 75px
+
+
+.user-score, .cohort-av
   font-weight: bold
-  font-sixe: 16px
+  font-size: 12px
   Z-Index: 1
 
-.cohort-av
-  margin-left: 292.5px
+
+.user-score
+  margin-left: 370px      //370 === 100%    105PX ===1%
   position: relative
-  top: 55px
-  font-weight: bold
-  font-sixe: 16px
+  top: 60px
+
+.cohort-av
+  position: relative
+  top: 45px
   color: grey
-  Z-Index: 1
+
+
 
 .arrow-down, .arrow-up
   width: 0
   height: 0
-  border-left: 10px solid transparent
-  border-right: 10px solid transparent
+  border-left: 6px solid transparent
+  border-right: 6px solid transparent
   Z-Index: 1
   position: relative
 
 .arrow-up
-  border-bottom: 20px solid grey
-  top: 35px
-  margin-left: -65px
-
+  border-bottom: 13px solid grey
+  top: 30px
+  margin-left: -45px
 
 .arrow-down
-  border-top: 20px solid #000
-  margin-top: 25px
-  margin-left: -50px
+  border-top: 13px solid #000
+  margin-top: 18px
+  margin-left: -35px
 
+
+.dot
+  height: 12px
+  width: 12px
+  background-color: #bbb
+  border-radius: 50%
+  display: inline-block
+
+.line
+  width: 20px
+  border-bottom: 3px solid grey

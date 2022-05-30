@@ -18,6 +18,7 @@ export class PersonalReportComponent implements OnInit {
 
   faCaretDown = faCaretDown;
 
+
   constructor(private personalReportDataService: PersonalReportDataService) { }
 
   private getRandomList(min: number, max: number, length:number): any[] {
@@ -54,13 +55,18 @@ export class PersonalReportComponent implements OnInit {
     return data
   }
 
+  y: number = Math.floor(Math.random()*100)
+  target: number = Math.floor(Math.random()*100)
+
+
   private personalChart2(): void {
     var chart = Highcharts.chart('chart2', {
       chart: {
         type: 'column',
         // width: 800,
-        height: 550
+        height: 550,
       },
+
       title: {
         text: 'chart2'
       },
@@ -72,6 +78,7 @@ export class PersonalReportComponent implements OnInit {
              'Self-Awareness', 'How to Say No', 'Effective Meetings',
              'Self-Awareness', 'Collaboration & Teamwork', 'Effective Meetings','Effective Meetings',
           ],
+          alternateGridColor: '#fff2e8',
            labels: {
              y: 42,
              style: {
@@ -84,22 +91,25 @@ export class PersonalReportComponent implements OnInit {
            offset: 0,
          },
          {
-             categories: ['Pre | Post', 'Pre | Post', 'Pre  Post',
-                          'Pre  Post', 'Pre  Post', 'Pre  Post',
-                          'Pre  Post', 'Pre  Post', 'Pre  Post', 'Pre  Post'],
-             linkedTo: 0,
-             opposite: false,
-             labels: {
-               style: {
-                 fontSize: 11,
-                 color: 'grey'
-               }
-             },
-             offset: 0
+          categories: [
+            'Pre | Post', 'Pre | Post', 'Pre  Post',
+            'Pre  Post', 'Pre  Post', 'Pre  Post',
+            'Pre  Post', 'Pre  Post', 'Pre  Post', 'Pre  Post'
+          ],
+          linkedTo: 0,
+          opposite: false,
+          labels: {
+            style: {
+              fontSize: 11,
+              color: 'grey'
+            }
+          },
+          offset: 0
            },
          ],
 
       yAxis: {
+
         // allowDecimals: false,
         min: 0,
         max: 5,
@@ -109,6 +119,11 @@ export class PersonalReportComponent implements OnInit {
         tickInterval: 1,
       },
 
+      legend:{ enabled:false },
+
+      credits: {
+        enabled: false
+      },
 
       plotOptions: {
         column: {
@@ -143,18 +158,16 @@ export class PersonalReportComponent implements OnInit {
         stack: 'female',
         color: '#7cba73'
       },
-
     ]
-
     }as any)
   }
 
   private getBulletGraph(): void {
-
     Highchartsbullet(Highcharts)
     Highcharts.chart('bullet-graph1', {
       chart: {
-        height: 150,
+        height: 93,
+        width: 410,
         inverted: true,
         marginLeft: 135,
         type: 'bullet',
@@ -164,11 +177,14 @@ export class PersonalReportComponent implements OnInit {
       title: {
         text: null
       },
+      xAxis: {
+        categories: ['']
+      },
 
       yAxis: {
         min: 0,
         max: 100,
-        tickInterval: 25,
+        tickInterval: 0,
         gridLineWidth: 0,
         plotBands: [{
           from: 0,
@@ -189,6 +205,7 @@ export class PersonalReportComponent implements OnInit {
           overflow: 'justify'
         },
       },
+      legend:{ enabled:false },
 
       plotOptions: {
             series: {
@@ -200,6 +217,7 @@ export class PersonalReportComponent implements OnInit {
               }
             }
           },
+
           credits: {
                 enabled: false
               },
@@ -209,20 +227,25 @@ export class PersonalReportComponent implements OnInit {
 
       series: [{
         data: [{
-          y: 80,
-          target: 68
-        }]
+          y: this.y,
+          target: this.target
+        }],
+
+
       }],
       tooltip: {
         pointFormat: '<b>{point.y}</b> (with target at {point.target})'
       }
     }as any);
+    console.log('y:', this.y, 'Target:', this.target)
   }
 
+  isEven:any = (Math.ceil(30 / 3)) % 2 == 0;
+
   private getNegativeStackBar2(): void {
-    console.log(this.getRandomList(65, 80, 30))
+    console.log(this.getRandomList(65, 80, 31))
     var sub_categories = [
-      'What is communication, why its important', 'What is professionalism and how does it connect to high performance', 'How to communicate', 'What is professionalism and how does it connect to high performance', 'Why is self-awareness critical for every professional',
+      'TEST','What is communication, why its important', 'What is professionalism and how does it connect to high performance', 'How to communicate', 'What is professionalism and how does it connect to high performance', 'Why is self-awareness critical for every professional',
       'What is communication, why its important', 'What is professionalism and how does it connect to high performance', 'How to communicate', 'What is professionalism and how does it connect to high performance', 'Why is self-awareness critical for every professional',
       'What is communication, why its important', 'What is professionalism and how does it connect to high performance', 'How to communicate', 'What is professionalism and how does it connect to high performance', 'Why is self-awareness critical for every professional',
       'What is communication, why its important', 'What is professionalism and how does it connect to high performance', 'How to communicate', 'What is professionalism and how does it connect to high performance', 'Why is self-awareness critical for every professional',
@@ -230,10 +253,11 @@ export class PersonalReportComponent implements OnInit {
       'What is communication, why its important', 'What is professionalism and how does it connect to high performance', 'How to communicate', 'What is professionalism and how does it connect to high performance', 'Why is self-awareness critical for every professional',
     ];
 
-    var categories = [
-      '', 'How to Sell', '', '', 'Effective Meetings', '', '', 'Professionalism', '', '', 'Question+X', '', '', 'How to Sell', '',
-      '', 'How to Sell', '', '', 'Effective Meetings', '', '', 'Professionalism',  '', '', 'How to Sell', '', '', 'Question+X', '', ''
+    var categories = [0, 1, 2,
+    'test', '', '', 'How to Sell', '', '', 'Effective Meetings', '', '', 'Professionalism', '', '', 'Question+X', '', '', 'How to Sell', '',
+     '', 'How to Sell', '', '', 'Effective Meetings', '', '', 'Professionalism',  '', '', 'How to Sell', '', '', 'Question+X', '', '',
     ]
+
 
     var chart = new Highcharts.Chart({
         chart: {
@@ -242,22 +266,25 @@ export class PersonalReportComponent implements OnInit {
           style: {
             fontFamily: 'Arial'
           },
+          plotBackgroundColor: this.isEven ? '#EAEAEA' : 'white',
           zoomType: "xy",
           marginLeft: 450,
           type: "column",
           inverted: true,
+          marginTop: -40
         },
 
         title: {
-          text: "getNegativeStackBar2"
+          text: null
         },
 
         xAxis: [
+
            {
             categories: sub_categories,
             labels: {
               align: "right",
-              x: 130,
+              x: -20,
               padding: 80,
               y: 3,       //!VERY IMPORTANT
               style: {
@@ -265,22 +292,25 @@ export class PersonalReportComponent implements OnInit {
                 color: 'grey'
               }
             },
-            offset: 150,
+            // offset: 150,
           },
           {
               categories: categories,
+              tickInterval: 3,
+              alternateGridColor: this.isEven ? 'white' : '#EAEAEA',
               linkedTo: 0,
               opposite: false,
               labels: {
-                x: -20,
+                x: -310,
                 padding: 0.0,
-                y: 0,
+                y: -35,
+                align: 'center',
                 style: {
                   fontSize: 14,
                   fontWeight: 'bold'
                 }
               },
-              offset: 300
+              offset: 0
             },
           ],
 
@@ -295,7 +325,7 @@ export class PersonalReportComponent implements OnInit {
 
         plotOptions: {
           series: {
-            pointWidth: 17,
+            pointWidth: 19,
             shadow: false,
             minPointLength: 14,
             borderWidth: 0
@@ -303,6 +333,11 @@ export class PersonalReportComponent implements OnInit {
           column: {
             stacking: 'normal'
           }
+        },
+        legend:{ enabled:false },
+
+        credits: {
+          enabled: false
         },
 
         series: [{
@@ -343,6 +378,7 @@ export class PersonalReportComponent implements OnInit {
       },
       xAxis: [{
         categories: categories,
+        // alternateGridColor: '#fff2e8',
         reversed: false,
         labels: {
           step: 1
@@ -520,39 +556,39 @@ export class PersonalReportComponent implements OnInit {
             enabled: true
         }
     },
-    xAxis:
-        [
-          {
-            categories: data,
-           labels: {
+
+    xAxis:[
+        {
+          categories: data,
+          labels: {
             format: '{value}%',
-             y: -5,
-             style: {
-               fontSize: 12,
-               fontWeight: 'bold',
-               color: 'black'
-             },
+              y: -5,
+              style: {
+                fontSize: 12,
+                fontWeight: 'bold',
+                color: 'black'
+              },
              overflow: "allow"
            },
            offset: 0,
          },
-         {
+        {
           categories: [
             'Self-Awareness', 'Communication', 'Effective Meetings',
             'Self-Awareness', 'How to Say No', 'Effective Meetings',
             'Self-Awareness', 'Collaboration & Teamwork', 'Effective Meetings','Effective Meetings',
-         ],
-             linkedTo: 0,
-             opposite: false,
-             labels: {
-               style: {
-                 fontSize: 11,
-                 color: 'grey'
-               }
-             },
-             offset: 0
-           },
-         ],
+          ],
+            linkedTo: 0,
+            opposite: false,
+            labels: {
+              style: {
+                fontSize: 11,
+                color: 'grey'
+              }
+            },
+            offset: 0
+        },
+      ],
 
     yAxis: {
       min: 0,
@@ -561,7 +597,12 @@ export class PersonalReportComponent implements OnInit {
         title: {
             text: 'Percent ( % )'
         },
+    },
 
+    legend:{ enabled:false },
+
+    credits: {
+      enabled: false
     },
 
     tooltip: {

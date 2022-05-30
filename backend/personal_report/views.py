@@ -5,8 +5,16 @@ from django.http import HttpResponse, JsonResponse
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, schema
 import pandas as pd
-from htmldocx import HtmlToDocx
+import os 
 
+
+# Works but has ADs
+import aspose.words as aw
+
+# Not working
+import win32com.client
+from htmldocx import HtmlToDocx
+import pypandoc
 
 
 
@@ -20,19 +28,44 @@ def generate_data():
     print(data)
     return data
   
-
-@api_view(['GET'])
+  
 def report(request):
-    # value = {
-    #   "id": 2,
-    #   "day_added": "2022-06-12T19:30",
-    #   "reminder": False,
-    #   "text": "New task"
-    # }
-    data = generate_data()
-    new_parser = HtmlToDocx()
-    new_parser.parse_html_file("csv/pywin32.html", "docx_filename")
+    
+    #YES Works but has ADs
+    doc = aw.Document('csv\Highcharts.html')
+    doc.save("html-to-word.docx")
+    
+    #NO creates file without charts
+    word = win32com.client.Dispatch("Word.Application")
 
-    return HttpResponse(json.dumps(data), content_type="application/json")
+    in_file  = os.path.abspath(r'csv/Highcharts.html')
+    in_name  = os.path.splitext(os.path.split(in_file)[1])[0]
+    out_file = os.path.abspath("%s.doc" % in_name)
+    
+    doc = word.Documents.Add(in_file)
+    word.Selection.WholeStory()
+    word.Selection.Copy()
+    doc.Close()
+    
+    doc = word.Documents.Add()
+    word.Selection.Paste()
+    doc.SaveAs(out_file, FileFormat=0)
+    doc.Close()
+
+    word.Quit()
+    
+    #decode error
+    # new_parser =
+    # HtmlToDocx()
+    # new_parser.parse_html_file('csv\Highcharts.html', 'Highcharts-out')
+    
+    #VEERY BED creates file without charts
+    # import pypandoc
+    # pypandoc.download_pandoc()
+    # output = pypandoc.convert_file('csv\Highcharts.html', 'docx', outputfile="somefile.docx", extra_args=['-RTS'])
+    # assert output == ""
+    
+    
+    return HttpResponse()
   
   
