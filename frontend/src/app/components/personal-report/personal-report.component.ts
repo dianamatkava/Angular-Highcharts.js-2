@@ -15,11 +15,55 @@ export class PersonalReportComponent implements OnInit {
   learner?: any
   values!: any[]
   name?: string
+  htmlToAdd: any
 
   faCaretDown = faCaretDown;
 
 
   constructor(private personalReportDataService: PersonalReportDataService) { }
+
+  private blob2base64 = (blob: any) => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onerror = reject;
+    reader.onload = () => resolve(reader.result);
+    reader.readAsDataURL(blob);
+});
+
+   data = {
+  "title": {
+    "text": "Chart image"
+  },
+  "xAxis": {
+    "categories": ["Jan", "Feb", "Mar"]
+  },
+  "series": [{
+    "data": [29.9, 71.5, 106.4]
+  }]
+}
+
+  private convertChartToImg(chart: any): void {
+    console.log(this.data)
+    // Prepare POST data
+    const body: any = new FormData();
+    body.append('infile', this.data);
+    body.append('width', 550);
+
+
+    // Post it to the export server
+    const blob = fetch('https://export.highcharts.com/', {
+        body,
+        method: 'post'
+    }).then(result => result.blob());
+    console.log(blob)
+
+
+    // Create the image
+    const img: any = new Image();
+    img.src = this.blob2base64(blob);
+    this.htmlToAdd = img;
+    console.log(this.blob2base64(blob))
+    // document.getElementById('container4').appendChild(img);
+  }
 
   private getRandomList(min: number, max: number, length:number): any[] {
     const data: any[] = []
@@ -60,6 +104,7 @@ export class PersonalReportComponent implements OnInit {
 
 
   private personalChart2(): void {
+
     var chart = Highcharts.chart('chart2', {
       chart: {
         type: 'column',
@@ -158,8 +203,9 @@ export class PersonalReportComponent implements OnInit {
         stack: 'female',
         color: '#7cba73'
       },
-    ]
+    ],
     }as any)
+    this.convertChartToImg(chart)
   }
 
   private getBulletGraph(): void {
@@ -349,7 +395,9 @@ export class PersonalReportComponent implements OnInit {
             color: '#c9c5b7'
           },
       ],
-      }as any);}
+      }as any);
+
+    }
 
 
   private getNegativeStackBar(): void {
@@ -357,7 +405,8 @@ export class PersonalReportComponent implements OnInit {
       'Question+X', 'Question+X', 'Question+X', 'Question+X', 'Question+X',
       'Question+X', 'Question+X', 'Question+X', 'Question+X', 'Question+X',
       'Question+X', 'Question+X', 'Question+X', 'Question+X', 'Question+X',
-      'Question+X', 'Question+X', 'Question4', 'Question3', 'Question2', 'Question+X is very very long and takes even two lines',
+      'Question+X', 'Question+X', 'Question4', 'Question3', 'Question2',
+      'Question+X is very very long and takes even two lines',
     ];
 
     var chart = new Highcharts.Chart({
