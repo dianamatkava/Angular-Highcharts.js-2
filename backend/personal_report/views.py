@@ -6,15 +6,18 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view, schema
 import pandas as pd
 import os 
-
+import requests
 
 # Works but has ADs
 import aspose.words as aw
 
-# Not working
+# no
 import win32com.client
-from htmldocx import HtmlToDocx
 import pypandoc
+
+# Not working at all
+from htmldocx import HtmlToDocx
+
 
 
 
@@ -25,22 +28,69 @@ def generate_data():
     result = data.to_json(orient="split")
     parsed = json.loads(result)
     data = json.dumps(parsed, indent=4)  
-    print(data)
     return data
   
   
 def report(request):
     
-    #YES Works but has ADs
-    doc = aw.Document('csv\Highcharts.html')
-    doc.save("html-to-word.docx")
+# without charts
+#     url = 'http://export.highcharts.com/'
+#     headers = {
+#     "Accept": "application/json",
+#     # "Content-Type": "multipart/form-data",
+#   }
     
-    #NO creates file without charts
-    word = win32com.client.Dispatch("Word.Application")
+#     chart_api = {
+#         "options": {
+#             "chart": {
+#                     "type": "bar"
+#                 },
+#                 "title": {
+#                     "text": "Fruit Consumption"
+#                 },
+#                 "xAxis": {
+#                     "categories": ["Apples", "Bananas", "Oranges"]
+#                 },
+#                 "yAxis": {
+#                     "title": {
+#                         "text": "Fruit eaten"
+#                     }
+#                 },
+#                 "series": [{
+#                     "name": "Jane",
+#                     "data": [1, 0, 4]
+#                 }, {
+#                     "name": "John",
+#                     "data": [5, 7, 3]
+#                 }]
+#             },
+        
+#         "filename": "test.png",
+#         "type": "image/png"
+#     #   'async': True
+#     }
+    
+#     r = requests.post(url, data=chart_api, headers=headers)
 
-    in_file  = os.path.abspath(r'csv/Highcharts.html')
-    in_name  = os.path.splitext(os.path.split(in_file)[1])[0]
-    out_file = os.path.abspath("%s.doc" % in_name)
+#     file = open("sample_image.png", "wb")
+#     file.write(r.content)
+#     file.close()
+#     print(r.__dict__)
+    
+    
+    
+    #YES Works but has ADs
+    # doc = aw.Document('csv\Highcharts.html')
+    # doc.save("html-to-word.docx")
+    
+    
+    #YES creates file without charts
+    word = win32com.client.Dispatch("Word.Application")
+    # in_file  = os.path.abspath(r'csv/Highcharts.html')
+    
+    in_file = requests.get('http://127.0.0.1:4200/')
+    in_name  = in_file.text
+    out_file = os.path.abspath("%s123.doc" % in_name)
     
     doc = word.Documents.Add(in_file)
     word.Selection.WholeStory()
@@ -54,12 +104,16 @@ def report(request):
 
     word.Quit()
     
-    #decode error
+    
+    
+    #NO decode error
     # new_parser =
     # HtmlToDocx()
     # new_parser.parse_html_file('csv\Highcharts.html', 'Highcharts-out')
     
-    #VEERY BED creates file without charts
+    
+    
+    #NO VEERY BED creates file without charts
     # import pypandoc
     # pypandoc.download_pandoc()
     # output = pypandoc.convert_file('csv\Highcharts.html', 'docx', outputfile="somefile.docx", extra_args=['-RTS'])

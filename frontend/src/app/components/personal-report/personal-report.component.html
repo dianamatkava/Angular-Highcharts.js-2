@@ -1,58 +1,46 @@
-<div class="charts">{{htmlToAdd}}
-<button class="p-2 m-2 btn" style="border: 1px solid grey; border-radius: 10px" id="btn-export" onclick="exportHTML();">Export2 as .doc</button>
-  <button class="p-2 m-8 btn" style="border: 1px solid grey; border-radius: 10px" onclick="Export2Word('exportContent', 'word-content');">Export as .doc</button>
+<div class="charts">
 
+
+
+  <!-- BULLET CHART -->
+  <div class="bullet-block my-8">
+    <div class="flex user-score" [ngStyle]="{'margin-left': 105+(y*2.65)+'px'}">
+      <p class="">Your score</p><i class="arrow-down"></i>
+    </div>
+    <div class="flex cohort-av" [ngStyle]="{'margin-left': 85+(target*2.65)+'px'}">
+       <p class="cohort-av">Cohort Avarage</p><i class="arrow-up"></i>
+    </div>
+
+    <div id="bullet-graph1"></div>
+  </div>
+
+  <!-- LEGEND -->
   <div class="legend flex">
     <p><span class="dot"></span>Above 75%</p>
-<p><span class="dot"></span>Above 40%</p>
-<p><span class="dot"></span>Below 40%</p>
-<div class="flex">
-  <span class="line"></span>
-  <span class="dot"></span>
-</div>
-<p>Cohort Average</p>
-  </div>
-<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea labore recusandae, nihil earum, dolore ullam, odit perferendis porro ad minus veritatis expedita? Ipsum adipisci voluptas ex blanditiis ullam a error?
-Nisi voluptatum dolorum rem, placeat neque sequi rovident tenetur iure praesentium quibusdam</p>
-
-  <div id="chart2">{{htmlToAdd}}</div>
-
-  <div id="box3"></div>
-
-<div class="bullet-block">
-  <div class="flex user-score" [ngStyle]="{'margin-left': 105+(y*2.65)+'px'}">
-    <p class="">Your score</p><i class="arrow-down"></i>
-  </div>
-  <div class="flex cohort-av" [ngStyle]="{'margin-left': 85+(target*2.65)+'px'}">
-     <p class="cohort-av">Cohort Avarage</p><i class="arrow-up"></i>
+    <p><span class="dot"></span>Above 40%</p>
+    <p><span class="dot"></span>Below 40%</p>
+    <div class="flex">
+      <span class="line"></span>
+      <span class="dot"></span>
+    </div>
+    <p>Cohort Average</p>
   </div>
 
-  <div id="bullet-graph1"></div>
-</div>
-<p>Lorem, ipsum dolor sit amet consectetur adpiente ipsam et mollitia nihil reiciendis, facilis vitae doloribus deserunt odio, unde repudiandae debitis asperiores. Natus, eligendi quibusdam ut porro beatae iste accusantium culpa fugit!</p>
 
-<div id="negative-stack2"></div>
-<div id="negative-stack"></div>
-<p> accusantium repellat atque soluta? Exercitationem rerum, fuga at fugiat maiores nulla rem delectus fugit. In obcaecati iste hic quia modi ducimus! Saepe ea quisquam et fugit nulla. Quo, animi voluptate.
-  Dignissimos aperiam libero quae perferendis unde ea facilis commodi cum! Quia quod incidunt tempore nulla quae! Error omnis quos dolores molestiae, nam obcaecati aliquid ad quod nulla, eos quae sunt?
-  Quasi sint recusandae non fugit. Modi error beatae doloremque neque pariatur placeat ratione, facilis tempora molestiae reprehenderit nihil dolores odio, perspiciatis, numquam odit excepturi aliquid illum fugiat voluptates. Doloribus, blanditiis.
-  Iste, aperiam laudantium voluptas, sapiente reprehenderit illum tempora sequi deleniti, aut</p>
+  <p class="my-8">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea labore recusandae, nihil earum, dolore ullam, odit perferendis porro ad minus veritatis expedita? Ipsum adipisci voluptas ex blanditiis ullam a error?
+  Nisi voluptatum dolorum rem, placeat neque sequi rovident tenetur iure praesentium quibusdam</p>
 
-<div class="flex">
-  <div id="chart2_02"></div>
-  <div id="chart2"></div>
-</div>
+  <!-- GAP TO -->
+  <div id="chart2" class="my-8"></div>
 
-  <div id="box3"></div>
-  <div id="box"></div>
-  <div id="box2"></div>
+  <div id="box3" class="my-8"></div>
 
+  <p class="my-8"> accusantium repellat atque soluta? Exercitationem rerum, fuga at fugiat maiores nulla rem delectus fugit. In obcaecati iste hic quia modi ducimus! Saepe ea quisquam et fugit nulla. Quo, animi voluptate.
+    Dignissimos aperiam libero quae perferendis unde ea facilis commodi cum! Quia quod incidunt tempore nulla quae! Error omnis quos dolores molestiae, nam obcaecati aliquid ad quod nulla, eos quae sunt?
+    Quasi sint recusandae non fugit. Modi error beatae doloremque neque pariatur placeat ratione, facilis tempora molestiae reprehenderit nihil dolores odio, perspiciatis, numquam odit excepturi aliquid illum fugiat voluptates. Doloribus, blanditiis.
+    Iste, aperiam laudantium voluptas, sapiente reprehenderit illum tempora sequi deleniti, aut</p>
 
-
-
-  <div id="personal-score"></div>
-  <div id="column"></div>
-
+  <div id="negative-stack2" class="my-8"></div>
 
 </div>
 
