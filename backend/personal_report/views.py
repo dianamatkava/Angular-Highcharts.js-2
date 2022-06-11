@@ -7,6 +7,7 @@ from rest_framework.decorators import api_view, schema
 import pandas as pd
 import os 
 import requests
+import urllib.request    
 
 # Works but has ADs
 import aspose.words as aw
@@ -79,30 +80,51 @@ def report(request):
     
     
     
-    #YES Works but has ADs
-    # doc = aw.Document('csv\Highcharts.html')
-    # doc.save("html-to-word.docx")
+    # YES Works but has ADs
+    # doc = aw.Document('csv\\new-Highcharts.html')
+    # doc.save("html-to-word-output.docx")
+    
+    # doc = aw.Document()
+    # builder = aw.DocumentBuilder(doc)
+    # r = requests.get('http://127.0.0.1:4200/new-java-app', allow_redirects=True)
+    # print(r.text)
+    
+    # # urllib.request.urlretrieve("http://127.0.0.1:4200/new-java-app", "test.html")
+
+                
+    # builder.insert_html(r.text)
+    # doc.save("html-to-word-req.docx")
+    
+    
+    import urllib.request, urllib.error, urllib.parse
+
+    url = 'http://127.0.0.1:4200/new-java-app'
+
+    response = urllib.request.urlopen(url)
+    webContent = response.read().decode('UTF-8')
+
+    print(webContent[0:300])
     
     
     #YES creates file without charts
-    word = win32com.client.Dispatch("Word.Application")
-    # in_file  = os.path.abspath(r'csv/Highcharts.html')
+    # word = win32com.client.Dispatch("Word.Application")
+    # in_file  = os.path.abspath(r'csv\\Highcharts.html')
     
-    in_file = requests.get('http://127.0.0.1:4200/')
-    in_name  = in_file.text
-    out_file = os.path.abspath("%s123.doc" % in_name)
+    # in_file = requests.get('http://127.0.0.1:4200/new-java-app')
+    # in_name  = in_file.text
+    # out_file = os.path.abspath("%s123.doc" % in_name)
     
-    doc = word.Documents.Add(in_file)
-    word.Selection.WholeStory()
-    word.Selection.Copy()
-    doc.Close()
+    # doc = word.Documents.Add(in_file)
+    # word.Selection.WholeStory()
+    # word.Selection.Copy()
+    # doc.Close()
     
-    doc = word.Documents.Add()
-    word.Selection.Paste()
-    doc.SaveAs(out_file, FileFormat=0)
-    doc.Close()
+    # doc = word.Documents.Add()
+    # word.Selection.Paste()
+    # doc.SaveAs(out_file, FileFormat=0)
+    # doc.Close()
 
-    word.Quit()
+    # word.Quit()
     
     
     

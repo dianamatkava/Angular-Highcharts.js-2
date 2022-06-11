@@ -55,6 +55,7 @@ private async convertChartToImg(chart: any) {
     options: JSON.stringify(chart),
     filename: 'test.png',
     type: 'image/png',
+    callback: 'C:\Users\diana\Documents\Hardskills-V2.14.2.5\Hardskills Admin Utility V2.14.2.5\Personal Report Data\resources\grouped-categories.js'
 
   };
 
