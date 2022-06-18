@@ -15,10 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from personal_report.views import report
+from personal_report.views import report, python_docs
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
-    path('', report),
+    path('report', report),
+    path('docx', python_docs),
 ]
