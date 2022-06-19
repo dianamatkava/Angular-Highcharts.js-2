@@ -1,6 +1,6 @@
 function(chart) {
-		var cohortAverage = [COHORT_AVERAGE_DATA];
-		var yourScore = 84;
+		var cohortAverage = 76;
+		var yourScore = 88;
         var series = chart.series[0],
                 xAxis = chart.xAxis[0],
                 dataLabel = series.data[2].dataLabel,

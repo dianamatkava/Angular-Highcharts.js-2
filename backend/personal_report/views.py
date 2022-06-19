@@ -1,4 +1,5 @@
 import os
+from pydoc import Doc
 import re
 import time
 from functools import reduce, wraps
@@ -9,6 +10,10 @@ from django.template.loader import render_to_string
 from docx import Document
 from docx.shared import Inches
 from docx.enum.text import WD_ALIGN_PARAGRAPH
+
+from etc.config.config import charts
+from docxtpl import DocxTemplate, InlineImage
+from docx.shared import Mm
 
 
 import time
@@ -21,66 +26,107 @@ def execution_speed(func):
         print(f'execution_speed is {end-start}')
         return HttpResponse()
     return wrapper
-    
-import subprocess
+
 
 @execution_speed
 def python_docs(request): 
     # # Create charts
     
-    LEARNER = 'dianaGera'
+    LEARNER = "dianaGera"
+    learner_get_data = {
+        'chart1': 10,
+        'chart2': 30,
+        'chart3': 20,
+        'chart4': 1
+    }
     
-    CHART_1 = 'chart1SettingsGeneral.json'
+    # Replace values in Render Settings and Callback files and create new settings files for each learner
+    regex = re.compile(r'\[([A-Z_]+)\]')
+    file_names = dict()
     
+    for chart in charts['settings']:
+        for settings in charts['settings'][chart]:
+            
+            template_path = charts['settings'][chart][settings]['template_path']
+            template_name = charts['settings'][chart][settings]['template_name']
+            
+            default_settings_path = f'{template_path}\{template_name}' if template_path else None
+            upload_to = f'.\etc\\temp\learner_chart_settings\\{LEARNER}_{template_name}'
+            
+            if charts['settings'][chart][settings]['data']:
+                learner_data = charts['settings'][chart][settings]['data'](learner_get_data[chart])
+                with open(f"{template_path}\{template_name}") as f:
+                    contents = f.read()
+                    
+                for key in re.findall(regex, contents):
+                    value_name = re.compile(r'\[{}]'.format(key))
+                    contents = value_name.sub(str(learner_data.get(key)), contents)
+                
+                with open(f"{upload_to}", 'w') as f:
+                    f.write(contents) 
+                    
+                file_names[settings] = upload_to
+            else:
+                file_names[settings] = default_settings_path
+                
+        cmd = f'cmd /c c: && .\highcharts-export-server --infile {file_names["settings_files"]} --outfile .\etc\\temp\chart_images\{LEARNER}-{chart}.png'
+        callback = f'--callback {file_names["callback_files"]}'
+        chart_run = os.system(' '.join([cmd, callback if file_names["callback_files"] else '']))        
+        print(chart_run)
     
-    # Replace values in Render Settings for Chart 4 and create new settings file
-    cohort_avarage_data = re.compile(r'\[A-Z_A-Z\]')
-    learner_score_data = re.compile(r'\[YOUR_SCORE_DATA\]')
-    with open('etc\highchart_render_settings\chart4RenderSettings.js') as f:
-        contents = f.read()
-    contents = cohort_avarage_data.sub(r'78', contents)
-    contents = learner_score_data.sub(r'84', contents)
-    with open(f'etc\highchart_render_settings\{LEARNER}_chart4RenderSettings.js', 'w') as f:
-        f.write(contents)
-        
+    doc = DocxTemplate('media\\docx\\Personal Report Template - NEW FORMAT - 10M.docx')
     
-    chart1 = os.system(f'.\highcharts-export-server --infile .\etc\\abhijeet.rai\\abhijeet.rai@hcl.com_Graph_1_Settings.json --outfile .\etc\\temp\chart_images\\new_chart1.png')
-    print(chart1)
-    # chart2 = os.system(f'.\highcharts-export-server --infile .\etc\\abhijeet.rai\\abhijeet.rai@hcl.com_Graph_2_Settings.json --outfile .\etc\\temp\chart_images\{LEARNER}_chart2.png --callback .\etc\\abhijeet.rai\grouped-categories.js')
-    # print(chart2)
-    # chart3 = os.system(f'.\highcharts-export-server --infile .\etc\\abhijeet.rai\\abhijeet.rai@hcl.com_Graph_3_Settings.json --outfile .\etc\\temp\chart_images\{LEARNER}_chart3.png --callback .\etc\\abhijeet.rai\grouped-categories.js')
-    # print(chart3)
-    # chart4 = os.system(f'.\highcharts-export-server --infile .\etc\\abhijeet.rai\\abhijeet.rai@hcl.com_Graph_4_Settings.json --outfile .\etc\\temp\chart_images\{LEARNER}_chart4.png --callback .\etc\\abhijeet.rai\\abhijeet.rai@hcl.com_chart4RenderSettings.js')
-    # print(chart4)
-        
-        
-    # chart1 = os.system(f'cmd /c c: && .\highcharts-export-server --infile .\etc\\abhijeet.rai\\abhijeet.rai@hcl.com_Graph_1_Settings.json --outfile .\etc\\temp\chart_images\{LEARNER}_new_chart1.png')
-    # print(chart1)
-    # chart2 = os.system(f'cmd /c c: && .\highcharts-export-server --infile .\etc\\abhijeet.rai\\abhijeet.rai@hcl.com_Graph_2_Settings.json --outfile .\etc\\temp\chart_images\{LEARNER}_chart2.png --callback .\etc\\abhijeet.rai\grouped-categories.js')
-    # print(chart2)
-    # chart3 = os.system(f'cmd /c c: && .\highcharts-export-server --infile .\etc\\abhijeet.rai\\abhijeet.rai@hcl.com_Graph_3_Settings.json --outfile .\etc\\temp\chart_images\{LEARNER}_chart3.png --callback .\etc\\abhijeet.rai\grouped-categories.js')
-    # print(chart3)
-    # chart4 = os.system(f'cmd /c c: && .\highcharts-export-server --infile .\etc\\abhijeet.rai\\abhijeet.rai@hcl.com_Graph_4_Settings.json --outfile .\etc\\temp\chart_images\{LEARNER}_chart4.png --callback .\etc\\abhijeet.rai\\abhijeet.rai@hcl.com_chart4RenderSettings.js')
-    # print(chart4)
-        
+    context = { 
+            'TRAINEE': "Diana",
+            'CLIENT_COHORT': 'ZZL Cohort 1',
+            'Product': 'Global Business Skills',
+            'DATE': 'today',
+            'SCORE': "100%",
+            'CERT': "Excellent",
+            'DESCRIPTION1': "Some custom description 1",
+            'DESCRIPTION2': "Some custom description 2"
+            }
+    doc.render(context)
+    for image in charts['image_to_replace']:
+        doc.replace_pic(charts['image_to_replace'][image], f'.\etc\\temp\chart_images\{LEARNER}-{image}.png')
+    doc.save('media\\docx\\example.docx')
+
+    
+    return HttpResponse()
+
+
+
+
+    # # Find images name
+    # for s in document.inline_shapes:
+    #    print (s.height.cm,s.width.cm,s._inline.graphic.graphicData.pic.nvPicPr.cNvPr.name)
+
+    # 1.7768944444444446 5.96
+    # 1.016661111111111 3.05 Picture 15
+    # 10.16 16.4846 Picture 3
+    # 20.32 16.483541666666667 Picture 2
+    # 11.43 16.4846 Picture 1
+    # 1.016 3.048 Cert - None.png
+    # 1.016 3.048 Cert - Completion.png
+    # 1.016 3.048 Cert - Merit.png
+    # 1.016 3.048 Cert - Distinction.png
+
     # # print(chart, type(chart))       # 4058 file not found         # type <int>
-    #                                   # 0 OK
-    #                                   # 1 System cant find the path
-    #                                   # if file is invalid the server will never stop, no error
-    
-    # document = Document('media\\docx\\Personal Report Template - NEW FORMAT - 10M.docx')
-    
-    
-    # # FIRST PAGE HEADER
+        #                                   # 0 OK
+        #                                   # 1 System cant find the path
+        #                                   # if file is invalid the server will never stop, no error
+        
+        
+    # FIRST PAGE HEADER
     # trainee_name = document.sections[0].first_page_header.tables[0].rows[1].cells[0].paragraphs[0].runs[0]      # TRAINEE
     # product_name = document.sections[0].first_page_header.tables[0].rows[1].cells[1].paragraphs[0].runs[0]      # Global Business Skills
     # client_cohort = document.sections[0].first_page_header.tables[0].rows[2].cells[0].paragraphs[0].runs[0]     # CLIENT COHORT
     # date = document.sections[0].first_page_header.tables[0].rows[2].cells[1].paragraphs[0].runs[1]              # DATE
         
-    # trainee_name.text = trainee_name.text.replace("TRAINEE", "Diana Matkava") 
-    # product_name.text = product_name.text.replace("Global Business Skills", "GBS1")
-    # client_cohort.text = client_cohort.text.replace("CLIENT COHORT", "ZZL_Cohort 4") 
-    # date.text = date.text.replace("DATE", "16.06.2022")
+    # trainee_name.text = trainee_name.text.replace("[TRAINEE]", "Diana Matkava") 
+    # product_name.text = product_name.text.replace("[Global Business Skills]", "GBS1")
+    # client_cohort.text = client_cohort.text.replace("[CLIENT COHORT]", "ZZL_Cohort 4") 
+    # date.text = date.text.replace("[DATE]", "16.06.2022")
     
     
     # # # PAGE 1 TABLE
@@ -123,28 +169,19 @@ def python_docs(request):
         
     
     
-    # # works nice if we know indexes
-    # # context = {
-    # #     'cert': 'Excellent',
-    # #     'score_heights': 'higher', 
-    # #     'score': 100,
-    # #     'user_top_module_1': 'Self Awareness',
-    # #     'user_top_module_2': 'Planning and Agility',
-    # #     'user_low_module_1': 'Something',
-    # #     'user_low_module_2': 'Something',
-    # # }
+    # works nice if we know indexes
+    # context = {
+    #     'cert': 'Excellent',
+    #     'score_heights': 'higher', 
+    #     'score': 100,
+    #     'user_top_module_1': 'Self Awareness',
+    #     'user_top_module_2': 'Planning and Agility',
+    #     'user_low_module_1': 'Something',
+    #     'user_low_module_2': 'Something',
+    # }
     
-    # # text = render_to_string('content.txt', context)
-    # # document.paragraphs[1].text = text
-    
-    
-    
-    # document.save('media\\docx\\example.docx')
-    return HttpResponse()
-
-
-
-
+    # text = render_to_string('content.txt', context)
+    # document.paragraphs[1].text = text
 
 def report(request):
     
