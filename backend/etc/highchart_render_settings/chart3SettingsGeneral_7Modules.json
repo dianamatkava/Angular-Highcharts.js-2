@@ -41,6 +41,7 @@
         	name: "Critical<br/>Thinking",
           categories: ["Pre", "Post"]
         }],
+        
         labels: {
 			rotation: 0,
 			style: {

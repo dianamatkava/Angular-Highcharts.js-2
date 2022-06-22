@@ -1,9 +1,25 @@
 # from personal_report.models import UserData
+import os
 import random
+import psycopg2
 
+def connect_db():
+    connection = psycopg2.connect(
+        dbname=os.environ.get('DATABASE'),
+        user=os.environ.get('USER'),
+        password=os.environ.get('PASSWORD'),
+        host=os.environ.get('HOST'),
+        port=os.environ.get('PORT')
+    )
+    return connection
+        
 
-def get_data_chart(value):
-    # return UserData.objects.get(id=id)
+def get_data_chart(value, connection=None):
+    connection = connect_db()
+    
+    # with connection.cursor() as cursor:
+    #     pass
+    
     
     data = {
         'DATA_TRAINEE': [random.randint(60, 100) for i in range(value)],
@@ -38,3 +54,4 @@ def get_data_chart4(value):
         'YOUR_SCORE_DATA': 88,
     }
     return data
+
