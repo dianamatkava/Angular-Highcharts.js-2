@@ -8,14 +8,13 @@ from django.http import HttpResponse
 from docxtpl import DocxTemplate
 
 from etc.docx_export import HighchartExportServer
-from etc.config.hc_gbs_config import product
+from etc.config.hc_gbs_config import product, config
 
 # https://highchart.azurewebsites.net/docx
 
-def generate_path(path=None, filename=None, delimiter='_', *args):
+def generate_path(path=None, filename: list()=None, delimiter='_'):
     if filename:
-        return os.path.join(settings.BASE_DIR, *path.split('/'), filename)
-   
+        return os.path.join(settings.BASE_DIR, *path.split('/'), delimiter.join(filter(None, filename)))
 
     
 def execution_speed(func):
@@ -41,6 +40,7 @@ def python_docs(request):
         'chart4': 1
     }
     
+    
     # charts = HighchartExportServer('gbs_config', 'etc/config')
     # charts.create_chart()
     
@@ -50,59 +50,59 @@ def python_docs(request):
     
     for chart in product['charts']:
         for chart_settings in product['charts'][chart]:
-            
-            template_path = product['charts'][chart][chart_settings]['template_path']
-            template_name = product['charts'][chart][chart_settings]['template_name']
-            
-            # Defind default path to Render Settings and Callback files 
-            file_names[chart_settings] = f"{generate_path(template_path, '_'.join(filter(None, [template_name])))}"
-            upload_to = f"{generate_path(product['temp_files_location']['settings'], '_'.join(filter(None, [LEARNER, template_name])))}"
-            
-            # if file has values that need to be replaced
             if product['charts'][chart][chart_settings]:
-                # and product['charts'][chart][chart_settings]['data']
+            
+                template_path = product['charts'][chart][chart_settings]['template_path']
+                template_name = product['charts'][chart][chart_settings]['template_name']
                 
-                # call function to get data. returns dict()
-                learner_data = product['charts'][chart][chart_settings]['data'](learner_get_data[chart])
+                # Defind default path to Render Settings and Callback files 
+                file_names[chart_settings] = f"{generate_path(template_path, [template_name])}"
+                upload_to = f"{generate_path(config['temp_files_location']['settings'], [LEARNER, template_name])}"
                 
-                with open(f"{file_names[chart_settings]}") as f:
-                    contents = f.read()
-                
-                # Find all matching regex arguments and replace it by learner_data key value pairs
-                for key in re.findall(regex, contents):
-                    variable_name = re.compile(r'\[{}]'.format(key))
-                    contents = variable_name.sub(str(learner_data.get(key)), contents)
-                
-                with open(f"{upload_to}", 'w') as f:
-                    f.write(contents)
+                # if file has values that need to be replaced
+                if product['charts'][chart][chart_settings]['data']:
+                    # and product['charts'][chart][chart_settings]['data']
                     
+                    # call function to get data. returns dict()
+                    learner_data = product['charts'][chart][chart_settings]['data'](learner_get_data[chart])
                     
-                file_names[chart_settings] = upload_to
+                    with open(f"{file_names[chart_settings]}") as f:
+                        contents = f.read()
+                    
+                    # Find all matching regex arguments and replace it by learner_data key value pairs
+                    for key in re.findall(regex, contents):
+                        variable_name = re.compile(r'\[{}]'.format(key))
+                        contents = variable_name.sub(str(learner_data.get(key)), contents)
+                    
+                    with open(f"{upload_to}", 'w') as f:
+                        f.write(contents)
+                        
+                        
+                    file_names[chart_settings] = upload_to
                 
-                
-        cmd = f"cmd /c c: && highcharts-export-server --infile {file_names['settings_files']} --outfile {generate_path(product['temp_files_location']['images'], '-'.join(filter(None, [LEARNER, chart])))}.png"
-        callback = f'--callback {file_names["callback_files"]}'
-        run_cmd = os.system(' '.join([cmd, callback if file_names["callback_files"] != 'None' else '']))       
+        cmd = f"cmd /c c: && highcharts-export-server --infile {file_names['settings_files']} --outfile {generate_path(config['temp_files_location']['images'], [LEARNER, chart])}.png"
+        callback = f'--callback {file_names.get("callback_files", None)}'
+        run_cmd = os.system(' '.join([cmd, callback if file_names.get("callback_files") else '']))       
              
              
-    if run_cmd:
-        doc = DocxTemplate('media\\docx\\Personal Report Template - NEW FORMAT - 10M.docx')
+    # if run_cmd:
+    #     doc = DocxTemplate('media\\docx\\Personal Report Template - NEW FORMAT - 10M.docx')
         
-        context = { 
-            'TRAINEE': "Diana",
-            'CLIENT_COHORT': 'ZZL Cohort 1', 
-            'Product': 'Global Business Skills',
-            'DATE': 'today',
-            'SCORE': "100%",
-            'CERT': "Excellent",
-            'DESCRIPTION1': "Some custom description 1",
-            'DESCRIPTION2': "Some custom description 2"
-        }
+    #     context = { 
+    #         'TRAINEE': "Diana",
+    #         'CLIENT_COHORT': 'ZZL Cohort 1', 
+    #         'Product': 'Global Business Skills',
+    #         'DATE': 'today',
+    #         'SCORE': "100%",
+    #         'CERT': "Excellent",
+    #         'DESCRIPTION1': "Some custom description 1",
+    #         'DESCRIPTION2': "Some custom description 2"
+    #     }
         
-        doc.render(context)
-        for image in product['image_to_replace']:
-            doc.replace_pic(product['image_to_replace'][image], f'.\etc\\temp\chart_images\{LEARNER}-{image}.png')
-        doc.save('media\\docx\\example.docx')
+    #     doc.render(context)
+    #     for image in product['image_to_replace']:
+    #         doc.replace_pic(product['image_to_replace'][image], f'.\etc\\temp\chart_images\{LEARNER}-{image}.png')
+    #     doc.save('media\\docx\\example.docx')
 
     # return HttpResponse()
 

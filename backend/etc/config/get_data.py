@@ -15,7 +15,7 @@ def connect_db():
         
 
 def get_data_chart(value, connection=None):
-    connection = connect_db()
+    # connection = connect_db()
     
     # with connection.cursor() as cursor:
     #     pass
