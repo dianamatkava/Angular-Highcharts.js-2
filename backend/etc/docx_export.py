@@ -77,7 +77,6 @@ class PersonalReport(HighchartExportServer):
     
     charts = dict()
     
-    # def 
     
     
     

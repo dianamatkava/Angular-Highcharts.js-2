@@ -1,6 +1,8 @@
 import os
 import re
 import time
+import logging
+
 from functools import wraps
 from django.conf import settings
 from django.shortcuts import render
@@ -11,6 +13,9 @@ from etc.docx_export import HighchartExportServer
 from etc.config.hc_gbs_config import product, config
 
 # https://highchart.azurewebsites.net/docx
+
+logger = logging.getLogger(__name__)
+
 
 def generate_path(path=None, filename: list()=None, delimiter='_'):
     if filename:
@@ -47,24 +52,25 @@ def python_docs(request):
     # Replace values in Render Settings and Callback files and create new settings files for each learner
     regex = re.compile(r'\[([A-Z_]+)\]')
     file_names = dict()
+    run_cmd = int()
     
     for chart in product['charts']:
-        for chart_settings in product['charts'][chart]:
-            if product['charts'][chart][chart_settings]:
+        for chart_settings in product['charts'][chart]['settings_files']:
+            if product['charts'][chart]['settings_files'][chart_settings]:
             
-                template_path = product['charts'][chart][chart_settings]['template_path']
-                template_name = product['charts'][chart][chart_settings]['template_name']
+                template_path = product['charts'][chart]['settings_files'][chart_settings]['template_path']
+                template_name = product['charts'][chart]['settings_files'][chart_settings]['template_name']
                 
                 # Defind default path to Render Settings and Callback files 
                 file_names[chart_settings] = f"{generate_path(template_path, [template_name])}"
                 upload_to = f"{generate_path(config['temp_files_location']['settings'], [LEARNER, template_name])}"
                 
                 # if file has values that need to be replaced
-                if product['charts'][chart][chart_settings]['data']:
+                if product['charts'][chart]['settings_files'][chart_settings]['data']:
                     # and product['charts'][chart][chart_settings]['data']
                     
                     # call function to get data. returns dict()
-                    learner_data = product['charts'][chart][chart_settings]['data'](learner_get_data[chart])
+                    learner_data = product['charts'][chart]['settings_files'][chart_settings]['data'](learner_get_data[chart])
                     
                     with open(f"{file_names[chart_settings]}") as f:
                         contents = f.read()
@@ -77,12 +83,16 @@ def python_docs(request):
                     with open(f"{upload_to}", 'w') as f:
                         f.write(contents)
                         
-                        
                     file_names[chart_settings] = upload_to
+                    
                 
-        cmd = f"cmd /c c: && highcharts-export-server --infile {file_names['settings_files']} --outfile {generate_path(config['temp_files_location']['images'], [LEARNER, chart])}.png"
-        callback = f'--callback {file_names.get("callback_files", None)}'
-        run_cmd = os.system(' '.join([cmd, callback if file_names.get("callback_files") else '']))       
+        cmd = f"cmd /c c: && highcharts-export-server --infile {file_names['hc_render_file']} --outfile {generate_path(config['temp_files_location']['images'], [LEARNER, chart])}.png"
+        callback = f'--callback {file_names["hc_callback_file"]}' if file_names.get("hc_callback_file", False) else ''
+        run_cmd += os.system(' '.join([cmd, callback]))       
+        
+    if run_cmd: logger.error(f'Images for {LEARNER} was not created successfully')
+    
+    print(run_cmd)
              
              
     # if run_cmd:
@@ -124,7 +134,7 @@ def python_docs(request):
     # 1.016 3.048 Cert - Merit.png
     # 1.016 3.048 Cert - Distinction.png
 
-    # # print(chart, type(chart))       # 4058 file not found         # type <int>
+    # # print(chart, type(chart))       # -4058 file not found         # type <int>
     #                                   # 0 OK
     #                                   # 1 System cant find the path
     #                                   # if file is invalid the server will never stop, no error
