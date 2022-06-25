@@ -6,8 +6,8 @@ import logging
 import pandas as pd
 from functools import wraps
 from django.shortcuts import render
-
 from .docx_export import DocxExport
+from etc.config.hc_gbs_config import hc_config
 
 # https://highchart.azurewebsites.net/docx
 
@@ -27,8 +27,6 @@ def execution_speed(func):
 
 @execution_speed
 def python_docs(request): 
-    # charts = DocxExport('hc_gbs_config', 'etc/config')
-    # charts.create_docx()
-    
-    
-
+    docx = DocxExport('hc_gbs_config', 'etc/config')
+    docx.generate_charts()
+    docx.create_docx()

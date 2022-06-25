@@ -1,5 +1,4 @@
-from .get_data import get_data_chart, get_data_chart3, get_data_chart4
-
+from .get_data import get_data_chart, get_data_chart3, get_data_chart4, get_learner_certificate
 
 
 general_config = {
@@ -10,12 +9,16 @@ general_config = {
         'images': 'etc/temp/chart_images/'
     },
     
-    'output_file_location': 'media/docx'
+    'output_file_location': 'media/docx',
+    'extra_images_location': 'media/img'
 }
 
 hc_config = {
     'extra_images_to_replace': {
-        'cert': 'cert'
+        'cert': {
+            'name': 'cert',
+            'data': get_learner_certificate
+        }
     },
     
     'charts': {

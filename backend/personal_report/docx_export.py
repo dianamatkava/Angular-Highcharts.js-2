@@ -1,14 +1,14 @@
 import os
 import re
-import signal
 import logging
 import importlib
+
 from docxtpl import DocxTemplate
 from docx import Document
 
 from etc.config.docx_templates import templates
 from .utils import generate_path
-
+2 
 logger = logging.getLogger(__name__)
 
 # def handler(signum, frame):
@@ -33,7 +33,7 @@ class HighchartExportServer():
         LEARNER = "dianaGera"
         learner_get_data = {
             'c1_global_score': 10,
-            'c2_module_scores': 20,
+            'c2_module_scores': 10,
             'c3_subject_scores': 30,
             'c4_gap_to_goal': 1
         }
@@ -46,6 +46,7 @@ class HighchartExportServer():
         
         for chart in self.hc_config['charts']:
             for chart_settings in self.hc_config['charts'][chart]['settings_files']:
+                file_names[chart_settings] = None
                 if self.hc_config['charts'][chart]['settings_files'][chart_settings]:
                 
                     template_path = self.hc_config['charts'][chart]['settings_files'][chart_settings]['template_path']
@@ -80,20 +81,21 @@ class HighchartExportServer():
             img_path = f"{generate_path(self.general_config['temp_files_location']['images'], [LEARNER, chart])}.png"
             cmd = f"highcharts-export-server --infile {file_names['hc_render_file']} --outfile {img_path}"
             callback = f'--callback {file_names["hc_callback_file"]}' if file_names.get("hc_callback_file", False) else ''
-            run_cmd += os.system(' '.join([cmd, callback])) 
-            
+            run_cmd += os.system(' '.join([cmd, callback]))
             
             if run_cmd: 
                 logger.error(f'Image {chart} for {LEARNER} was not created successfully')
                 return None
             else: 
                 images_path[f"{self.hc_config['charts'][chart]['image_to_replace']}"] = img_path
-                
+        
         if self.hc_config['extra_images_to_replace']:
             for image in self.hc_config['extra_images_to_replace']:
-                images_path[f"{self.hc_config['extra_images_to_replace'][image]}"] = r"C:\\Users\\diana\\Documents\\projects\\highcharts\\core\\backend\\media\\img\\Cert_Destinction.png"
+                img = self.hc_config['extra_images_to_replace'][image]
+                if img['data']:
+                    img_name = img['data']() # will be user uuid
+                    images_path[f"{img['name']}"] = generate_path(self.general_config['extra_images_location'], [f"Cert_{img_name}.png"])
 
-        
 
         return images_path
                 
@@ -104,6 +106,8 @@ class HighchartExportServer():
 class DocxExport():
     config_file = str()      # null False
     config_path = str()      # null False
+    chart_images = dict()
+    docx_content = dict()
     mod = None
     
     def __init__(self, config_file, config_path):
@@ -115,15 +119,15 @@ class DocxExport():
     def generate_charts(self):
         # returns dictionary with path to images
         charts = HighchartExportServer(self.mod.hc_config, self.mod.general_config)
-        return charts.create_chart()
+        self.chart_images = charts.create_chart()
         
     def generate_content(self): 
         # returns dictionary with content
         pass
     
     def create_docx(self):
-        chart_images = self.generate_charts()
-        docx_content = self.generate_content()
+        # chart_images = self.generate_charts()
+        # docx_content = self.generate_content()
         
         template_path = templates[self.mod.general_config['docx_template_name']]['path']
         template_name = templates[self.mod.general_config['docx_template_name']]['name']
@@ -148,7 +152,7 @@ class DocxExport():
         for s in doc.inline_shapes:
             image_name = s._inline.graphic.graphicData.pic.nvPicPr.cNvPr.get('descr', None)
             if image_name:
-                doc.replace_pic(image_name, chart_images[image_name])
+                doc.replace_pic(image_name, self.chart_images[image_name])
             
             
         doc.save(f"{generate_path(self.mod.general_config['output_file_location'], [context['TRAINEE'], context['CLIENT_COHORT'], self.mod.general_config['docx_template_name']], extension='docx')}.docx")
