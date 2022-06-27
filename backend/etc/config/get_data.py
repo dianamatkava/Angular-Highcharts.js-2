@@ -1,18 +1,10 @@
 # from personal_report.models import UserData
 import os
 import random
-import psycopg2
 import pandas as pd
+from functools import partial
+from personal_report.utils import db_connect, gbs_sort_method
 
-def connect_db():
-    connection = psycopg2.connect(
-        dbname=os.environ.get('DATABASE'),
-        user=os.environ.get('USER'),
-        password=os.environ.get('PASSWORD'),
-        host=os.environ.get('HOST'),
-        port=os.environ.get('PORT')
-    )
-    return connection
         
 
 # None
@@ -20,7 +12,6 @@ def connect_db():
 
 # Completion
 # All modules >= 40%	
-
 
 # Merit
 # All modules >= 40%
@@ -74,29 +65,108 @@ def get_learner_certificate(learner_performance:list()=test_data['Merit']):
     # print(cert_name[cert_index])
     
     
-def get_data_chart(value, connection=None):
-    # connection = connect_db()
+def get_learenr_all(cohort:str()):
+    data = db_connect(
+        """ 
+            select L.uuid from hs_cohort as C
+            inner join hs_learner as L
+            on L.hs_cohort_uuid=C.uuid
+            where C.name='Future Fibres.Cohort_002';
+        """
+    )
     
-    # with connection.cursor() as cursor:
-    #     pass
+    return pd.DataFrame(data)
+
     
+def get_module_scores_data(cohort, learner):
+    
+    data_trinee = db_connect(
+        f"""
+            select LTP.rpt_topic_name, LTP.rpt_topic_score
+            from hs_summary_learner_topic_scores as LTP
+
+            inner join hs_cohort as C
+            on C.uuid=LTP.hs_cohort_uuid
+
+            inner join hs_learner as L
+            on L.uuid=LTP.hs_learner_uuid
+
+            where C.name='{cohort}' and L.uuid='{learner}';
+        """
+    )
+    
+    data_cohort = db_connect(
+        f"""
+            select CTP.rpt_topic_name, CTP.rpt_topic_score
+            from hs_summary_cohort_topic_scores as CTP
+
+            inner join hs_cohort as C
+            on C.uuid=CTP.hs_cohort_uuid
+
+            inner join hs_learner as L
+            on L.hs_cohort_uuid=C.uuid
+
+            where C.name='{cohort}' and L.uuid='{learner}';
+        """
+    )
+    
+    df_learner = pd.DataFrame(sorted(data_trinee, key=partial(gbs_sort_method, modules=True)))
+    df_cohort = pd.DataFrame(sorted(data_cohort, key=partial(gbs_sort_method, modules=True)))
     
     data = {
-        'DATA_TRAINEE': [random.randint(60, 100) for i in range(value)],
-        'DATA_COHORT': [random.randint(70, 100) for j in range(value)]
+        'DATA_TRAINEE': df_learner[0].to_numpy()*100,
+        'DATA_COHORT': df_cohort[0].to_numpy()*100
     }
+    
     return data
 
 
-def get_data_chart3(value):
-    # return UserData.objects.get(id=id)
-    import itertools
-    # data = {
-    #     'GAP_TO_GOAL_DATA': [random.randint(0, 1) for i in range(20)],
-    #     'INCREASE_IN_SELF_RATING_DATA':  [x for y in zip([0 for i in range(10)], [random.randint(60, 100) for i in range(10)]) for x in y],
-    #     'DROP_IN_SELF_RATING_DATA': [random.randint(0, 0) for i in range(20)],
-    #     'CURRENT_RATING_DATA': [x for y in zip([random.randint(60, 100) for i in range(10)], [0 for i in range(10)]) for x in y]
-    # }   
+def get_subject_scores_data(cohort, learner):
+    
+    data_trinee = db_connect(
+        f"""
+            select rpt_concept_name, rpt_concept_score
+            from hs_summary_learner_concept_scores
+
+                inner join hs_cohort as C
+                    on C.uuid=hs_cohort_uuid
+
+                inner join hs_learner as L
+                    on L.uuid=hs_learner_uuid
+                    
+            where C.name='{cohort}' and L.uuid='{learner}';
+        """
+    )
+    
+    data_cohort = db_connect(
+        f"""
+            select rpt_concept_name, rpt_concept_score
+            from hs_summary_cohort_concept_scores
+            
+                inner join hs_cohort as C
+                    on C.uuid=hs_cohort_uuid
+                inner join hs_learner as L
+                    on L.hs_cohort_uuid=C.uuid
+                    
+            where C.name='{cohort}' and L.uuid='{learner}';
+        """
+    )
+    
+    df_learner = pd.DataFrame(sorted(data_trinee, key=partial(gbs_sort_method, subjects=True)))
+    df_cohort = pd.DataFrame(sorted(data_cohort, key=partial(gbs_sort_method, subjects=True)))
+    
+    data = {
+        'DATA_TRAINEE': df_learner[1].to_numpy()*100,
+        'DATA_COHORT': df_cohort[1].to_numpy()*100
+    }
+    
+    return data
+
+
+
+
+def get_data_chart3(value=None):
+    
     
     data = {
         'GAP_TO_GOAL_DATA': [1, 0, 2, 1, 1, 0, 1, 0, 1, 0, 2, 1, 1, 0, 1, 0, 1, 0, 0, 0],
@@ -115,3 +185,6 @@ def get_data_chart4(value):
     }
     return data
 
+
+# get learner list by coh name 
+# HsLearner.objects.filter(cohort__name='HCL.Cohort_037')

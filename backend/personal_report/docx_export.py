@@ -4,18 +4,11 @@ import logging
 import importlib
 
 from docxtpl import DocxTemplate
-from docx import Document
 
 from etc.config.docx_templates import templates
-from .utils import generate_path
-2 
+from .utils import generate_path, db_connect
+
 logger = logging.getLogger(__name__)
-
-# def handler(signum, frame):
-#     print('Signal handler called with signal', signum)
-#     raise OSError("Infinity loop")
-
-# signal.signal(signal.SIGABRT,handler) 
 
 
 class HighchartExportServer():
@@ -42,7 +35,6 @@ class HighchartExportServer():
         regex = re.compile(r'\[([A-Z_]+)\]')
         file_names = dict()
         images_path = dict()
-        run_cmd = int()
         
         for chart in self.hc_config['charts']:
             for chart_settings in self.hc_config['charts'][chart]['settings_files']:
@@ -74,10 +66,8 @@ class HighchartExportServer():
                         with open(f"{upload_to}", 'w') as f:
                             f.write(contents)
                             
-                            
                         file_names[chart_settings] = upload_to
                         
-            # signal.alarm(1) 
             img_path = f"{generate_path(self.general_config['temp_files_location']['images'], [LEARNER, chart])}.png"
             cmd = f"highcharts-export-server --infile {file_names['hc_render_file']} --outfile {img_path}"
             callback = f'--callback {file_names["hc_callback_file"]}' if file_names.get("hc_callback_file", False) else ''
@@ -126,15 +116,11 @@ class DocxExport():
         pass
     
     def create_docx(self):
-        # chart_images = self.generate_charts()
-        # docx_content = self.generate_content()
-        
         template_path = templates[self.mod.general_config['docx_template_name']]['path']
         template_name = templates[self.mod.general_config['docx_template_name']]['name']
         template = generate_path(template_path, [template_name])
         
         doc = DocxTemplate(template)
-        document = Document(template)
            
         context = { 
             'TRAINEE': "Diana",

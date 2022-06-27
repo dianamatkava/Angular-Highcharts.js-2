@@ -1,4 +1,4 @@
-from .get_data import get_data_chart, get_data_chart3, get_data_chart4, get_learner_certificate
+from .get_data import *
 
 
 general_config = {
@@ -43,7 +43,7 @@ hc_config = {
                 'hc_render_file': {                                             
                     'template_path': 'etc/highchart_render_settings',           
                     'template_name': 'chart1SettingsGeneral.json',
-                    'data': get_data_chart
+                    'data': get_module_scores_data
                 },
                 'hc_callback_file': None 
             },
@@ -55,7 +55,7 @@ hc_config = {
                 'hc_render_file': {
                     'template_path': 'etc/highchart_render_settings',
                     'template_name': 'chart2SettingsGeneral.json',
-                    'data': get_data_chart
+                    'data': get_subject_scores_data
                 },
                 'hc_callback_file': {
                     'template_path': 'etc/highchart_callback_settings',
