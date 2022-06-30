@@ -1,11 +1,11 @@
 # from personal_report.models import UserData
+import itertools
 import os
 import random
+from sqlite3 import dbapi2
 import pandas as pd
 from functools import partial
-from personal_report.utils import db_connect, gbs_sort_method
-
-        
+from personal_report.utils import *
 
 # None
 # 1 or more modules < 40%	
@@ -67,11 +67,14 @@ def get_learner_certificate(learner_performance:list()=test_data['Merit']):
     
 def get_learenr_all(cohort:str()):
     data = db_connect(
-        """ 
-            select L.uuid from hs_cohort as C
+        f""" 
+            select C.uuid, C.name, L.uuid, P.email from hs_cohort as C
             inner join hs_learner as L
             on L.hs_cohort_uuid=C.uuid
-            where C.name='Future Fibres.Cohort_002';
+            inner join hs_person as P
+            on P.uuid=L.hs_person_uuid
+
+            where C.name='{cohort}';
         """
     )
     
@@ -82,7 +85,7 @@ def get_module_scores_data(cohort, learner):
     
     data_trinee = db_connect(
         f"""
-            select LTP.rpt_topic_name, LTP.rpt_topic_score
+            select LTP.rpt_topic_name, LTP.rpt_topic_score*100
             from hs_summary_learner_topic_scores as LTP
 
             inner join hs_cohort as C
@@ -97,7 +100,7 @@ def get_module_scores_data(cohort, learner):
     
     data_cohort = db_connect(
         f"""
-            select CTP.rpt_topic_name, CTP.rpt_topic_score
+            select CTP.rpt_topic_name, CTP.rpt_topic_score*100
             from hs_summary_cohort_topic_scores as CTP
 
             inner join hs_cohort as C
@@ -112,20 +115,20 @@ def get_module_scores_data(cohort, learner):
     
     df_learner = pd.DataFrame(sorted(data_trinee, key=partial(gbs_sort_method, modules=True)))
     df_cohort = pd.DataFrame(sorted(data_cohort, key=partial(gbs_sort_method, modules=True)))
-    
+    print(df_learner[0])
     data = {
-        'DATA_TRAINEE': df_learner[0].to_numpy()*100,
-        'DATA_COHORT': df_cohort[0].to_numpy()*100
+        'DATA_TRAINEE': [round(int(i)) for i in df_learner[1].to_numpy()][0:6],
+        'DATA_COHORT': [round(int(i)) for i in df_cohort[1].to_numpy()][0:6]
     }
     
     return data
-
+ 
 
 def get_subject_scores_data(cohort, learner):
     
     data_trinee = db_connect(
         f"""
-            select rpt_concept_name, rpt_concept_score
+            select rpt_concept_name, rpt_concept_score*100
             from hs_summary_learner_concept_scores
 
                 inner join hs_cohort as C
@@ -140,11 +143,12 @@ def get_subject_scores_data(cohort, learner):
     
     data_cohort = db_connect(
         f"""
-            select rpt_concept_name, rpt_concept_score
+            select rpt_concept_name, rpt_concept_score*100
             from hs_summary_cohort_concept_scores
             
                 inner join hs_cohort as C
                     on C.uuid=hs_cohort_uuid
+                    
                 inner join hs_learner as L
                     on L.hs_cohort_uuid=C.uuid
                     
@@ -156,35 +160,65 @@ def get_subject_scores_data(cohort, learner):
     df_cohort = pd.DataFrame(sorted(data_cohort, key=partial(gbs_sort_method, subjects=True)))
     
     data = {
-        'DATA_TRAINEE': df_learner[1].to_numpy()*100,
-        'DATA_COHORT': df_cohort[1].to_numpy()*100
+        'DATA_TRAINEE': [round(int(i)) for i in df_learner[1].to_numpy()][0:18],
+        'DATA_COHORT': [round(int(i)) for i in df_cohort[1].to_numpy()][0:18]
     }
     
     return data
 
 
-
-
-def get_data_chart3(value=None):
+def get_gap_data(cohort, learner):
+    gap_data = db_connect(
+        f"""
+            select rpt_subject_name, rpt_benchmarking_name, rpt_current_score, rpt_goal, rpt_gap2goal
+            from hs_summary_learner_gap_data
+            
+                inner join hs_cohort as C
+                    on C.uuid=hs_cohort_uuid
+                    
+                inner join hs_learner as L
+                    on L.uuid=hs_learner_uuid
+                    
+            where C.name='{cohort}' and L.uuid='{learner}'
+            and (rpt_benchmarking_name='Pre' or rpt_benchmarking_name='Post')
+            order by rpt_benchmarking_name;
+        """
+    )
+    pre_gap_data = list()
+    post_gap_data = list()
     
+    [pre_gap_data.append(x) if x[1] == "Pre" else post_gap_data.append(x) for x in gap_data]
+    
+    pre_gap_df = pd.DataFrame(sorted(pre_gap_data, key=partial(gbs_sort_method, modules=True)))
+    post_gap_df = pd.DataFrame(sorted(post_gap_data, key=partial(gbs_sort_method, modules=True)))
     
     data = {
-        'GAP_TO_GOAL_DATA': [1, 0, 2, 1, 1, 0, 1, 0, 1, 0, 2, 1, 1, 0, 1, 0, 1, 0, 0, 0],
-        'INCREASE_IN_SELF_RATING_DATA':  [0, 5, 0, 4, 0, 5, 0, 5, 0, 5, 0, 4, 0, 5, 0, 5, 0, 5, 0, 0],
-        'DROP_IN_SELF_RATING_DATA': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        'CURRENT_RATING_DATA': [4, 0, 3, 0, 4, 0, 4, 0, 3, 0, 3, 0, 4, 0, 4, 0, 4, 0, 5, 5]
+        'GAP_TO_GOAL_DATA': merge_with_zero(odd=True, list1=[i for i in pre_gap_df[4].to_numpy()][0:6]), 
+        'INCREASE_IN_SELF_RATING_DATA':  merge_with_zero(odd=False, list1=[i for i in pre_gap_df[3].to_numpy()][0:6]),
+        'DROP_IN_SELF_RATING_DATA': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0][0:6],
+        'CURRENT_RATING_DATA': merge_with_zero(odd=True, list1=[i for i in post_gap_df[2].to_numpy()][0:6])
     }  
+    
     return data
 
-
-def get_data_chart4(value):
+def get_perf_data(cohort=None, learner=None):
+    trainee_average_score = db_connect(
+        f"""
+            select rpt_average_score*100 from hs_summary_learner_perf_data 
+            where hs_learner_uuid='{learner}';
+        """
+    )
+    cohort_average_score = db_connect(
+        f"""
+            select rpt_average_score*100 from hs_summary_cohort_details 
+            inner join hs_cohort as C
+            on C.uuid=hs_cohort_uuid
+            where C.name='{cohort}';
+        """
+    )
     
     data = {
-        'COHORT_AVERAGE_DATA': 76,
-        'YOUR_SCORE_DATA': 88,
+        'COHORT_AVERAGE_DATA': cohort_average_score[0][0],
+        'YOUR_SCORE_DATA': trainee_average_score[0][0],
     }
     return data
-
-
-# get learner list by coh name 
-# HsLearner.objects.filter(cohort__name='HCL.Cohort_037')

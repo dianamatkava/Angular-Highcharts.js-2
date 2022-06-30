@@ -25,14 +25,14 @@ hc_config = {
         'c1_global_score': {
             'settings_files': {
                 'hc_render_file': {
-                    'template_path': 'etc/highchart_render_settings',
+                    'template_path': 'etc/highchart_render_settings/gbs',
                     'template_name': 'chart4SettingsGeneral.json',
-                    'data': get_data_chart4 
+                    'data': get_perf_data 
                 },
                 'hc_callback_file': {
                     'template_path': 'etc/highchart_callback_settings',
                     'template_name': 'chart4RenderSettings.js',
-                    'data': get_data_chart4
+                    'data': get_perf_data
                 },
             },
             'image_to_replace': 'global_score'
@@ -41,7 +41,7 @@ hc_config = {
         'c2_module_scores': {
             'settings_files': {
                 'hc_render_file': {                                             
-                    'template_path': 'etc/highchart_render_settings',           
+                    'template_path': 'etc/highchart_render_settings/gbs',           
                     'template_name': 'chart1SettingsGeneral.json',
                     'data': get_module_scores_data
                 },
@@ -53,7 +53,7 @@ hc_config = {
         'c3_subject_scores': {
             'settings_files': {
                 'hc_render_file': {
-                    'template_path': 'etc/highchart_render_settings',
+                    'template_path': 'etc/highchart_render_settings/gbs',
                     'template_name': 'chart2SettingsGeneral.json',
                     'data': get_subject_scores_data
                 },
@@ -69,9 +69,9 @@ hc_config = {
         'c4_gap_to_goal': {
             'settings_files': {
                 'hc_render_file': {
-                    'template_path': 'etc/highchart_render_settings',
+                    'template_path': 'etc/highchart_render_settings/gbs',
                     'template_name': 'chart3SettingsGeneral.json',
-                    'data': get_data_chart3
+                    'data': get_gap_data
                 },
                 'hc_callback_file': {
                     'template_path': 'etc/highchart_callback_settings',

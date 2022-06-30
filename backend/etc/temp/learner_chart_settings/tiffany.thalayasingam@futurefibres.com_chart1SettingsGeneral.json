@@ -88,7 +88,7 @@
     series: [{
         type: 'column',
         name: 'Above 75%',
-        data: [99, 72, 67, 60, 92, 93, 80, 85, 80, 79],
+        data: [75, 69, 49, 32, 51, 40, 7, 52, 50, 56],
         color: '#00b050'
       }, {
         type: 'column',
@@ -102,7 +102,7 @@
       }, {
       	type: 'spline',
         name: 'Cohort Average',
-        data: [81, 77, 82, 95, 92, 79, 80, 71, 92, 96],
+        data: [83, 82, 80, 70, 76, 75, 58, 74, 76, 67],
         color: '#cccccc'
       }
    ],

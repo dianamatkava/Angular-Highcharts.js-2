@@ -1,7 +1,6 @@
 import os
 import psycopg2
-import pandas as pd
-import re
+from functools import lru_cache
 from django.conf import settings
 
 
@@ -10,7 +9,7 @@ def generate_path(path=None, filename: list()=None, delimiter='_', extension=Non
         return os.path.join(settings.BASE_DIR, *path.split('/'), delimiter.join(filter(None, filename)))
 
 
-    
+@lru_cache
 def gbs_sort_method(x, modules:bool=False, subjects:bool=False):
     
     sorted_lists = {
@@ -42,19 +41,10 @@ def gbs_sort_method(x, modules:bool=False, subjects:bool=False):
         ]
     }
     
-    # from db
-    # Understanding that plans are nothing, planning is everything, and how to apply planning
-    
-    # from hs settings
-    # Understanding plans are nothing, planning is everything & how to plan
-    
-    # and more then 
-    
-    for index, module in enumerate(sorted_lists.get(True)):
+    objects = set(x)&set(sorted_lists.get(True))
+    for index, module in enumerate(objects):
         if x[0].startswith(module):
             return (index, x[0][len(module):])
-    
-
     
     
 def db_connect(query=str()):
@@ -83,3 +73,9 @@ def db_connect(query=str()):
     
 
 
+def merge_with_zero(odd:bool=False, list1:list()=[]):
+    for i in range(len(list1)*2):
+        if i % 2 == odd:
+            list1.insert(i, 0)
+            
+    return list1
