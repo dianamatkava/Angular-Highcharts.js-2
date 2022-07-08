@@ -12,8 +12,8 @@ logger = logging.getLogger(__name__)
 
 
 class HighchartExportServer():
-    hc_config = dict()
-    general_config = dict()
+    hc_config = dict
+    general_config = dict
     
     def __init__(self, hc_config, general_config):
         self.hc_config = hc_config
@@ -31,21 +31,19 @@ class HighchartExportServer():
         for chart in hc_config['charts']:
             for chart_settings in hc_config['charts'][chart]['settings_files']:
                 file_names[chart_settings] = None
-                if hc_config['charts'][chart]['settings_files'][chart_settings]:
-                
-                    template_path = hc_config['charts'][chart]['settings_files'][chart_settings]['template_path']
-                    template_name = hc_config['charts'][chart]['settings_files'][chart_settings]['template_name']
+                chart_settings = hc_config['charts'][chart]['settings_files'][chart_settings]
+                if chart_settings:
                     
                     # Defind default path to Render Settings and Callback files 
-                    file_names[chart_settings] = f"{generate_path(template_path, [template_name])}"
-                    upload_to = f"{generate_path(general_config['temp_files_location']['settings'], [child_data['name'], template_name])}"
+                    file_names[chart_settings] = f"{generate_path(chart_settings['template_path'], [chart_settings['template_name']])}"
+                    upload_to = f"{generate_path(general_config['temp_files_location']['settings'], [child_data['name'], chart_settings['template_name']])}"
                     
                     # if file has values that need to be replaced
-                    if hc_config['charts'][chart]['settings_files'][chart_settings]['data']:
+                    if chart_settings['data']:
                         # and product['charts'][chart][chart_settings]['data']
                         
                         # call function to get data. returns dict()
-                        learner_data = hc_config['charts'][chart]['settings_files'][chart_settings]['data'](parent_data['name'], child_data['id'])
+                        learner_data = chart_settings['data'](parent_data['name'], child_data['id'])
                         
                         with open(f"{file_names[chart_settings]}") as f:
                             contents = f.read()
@@ -80,6 +78,24 @@ class HighchartExportServer():
 
         return images_path
                 
+                
+# class ReportConfig
+# class ReportData
+#     db, exel, output json
+
+# class ReportChart
+#     data that required
+#     ReportData
+#     can come from dif resources
+    
+# class ReportTemplateClass
+ 
+#     list of all CharsetMatches
+#     name template to use
+    
+# class ReportGenerate    
+#     will call every time to create file
+        
                 
 class DocxExport():
     config_file = str()      # null False
@@ -121,7 +137,6 @@ class DocxExport():
         template = generate_path(template_path, [template_name])
         
         # for now lets imaging we have some logic here
-        
         
         doc = DocxTemplate(template)
         doc.render(self.docx_content )

@@ -7,6 +7,7 @@ import pandas as pd
 from functools import wraps
 from django.shortcuts import render
 
+from .generate_report import ReportData
 from .docx_export import DocxExport
 from etc.config.hc_gbs_config import hc_config
 from etc.config.get_data import *
@@ -48,6 +49,3 @@ def python_docs(request):
         docx.generate_content(parent_data, child_data)
         docx.create_docx()
     
-    # cohort = 'Future Fibres.Cohort_002'
-    # learner = '9e6f6e50-5316-484e-96ea-9961e5763b2a'
-    # get_perf_data(cohort, learner)

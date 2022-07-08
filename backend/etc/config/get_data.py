@@ -50,19 +50,6 @@ def get_learner_certificate(learner_performance:list()=test_data['Merit']):
     return cert_name[bool_values.index(True)]
     
     # high_score_length = len(list(filter(lambda x: x >= 75, learner_performance))) # 6 Merit #5 Completion 10 Destinction 0 None
-    # low_score_length = len(list(filter(lambda x: x < 75 and x > 40, learner_performance)))
-    # score_length = high_score_length + low_score_length
-    # print(score_length)
-    
-    # x = [pd.Series(score_length).between(*i) for i in cert_rule]
-    # cert_index = [i[0] for i in x].index(True)
-    
-    
-    # x = [ (df[j],) for j in boolean_range for i in df]
-    # print(x)
-    # cert_index = [i[0] for i in x].index(True, 0)
-    
-    # print(cert_name[cert_index])
     
     
 def get_learenr_all(cohort:str()):
