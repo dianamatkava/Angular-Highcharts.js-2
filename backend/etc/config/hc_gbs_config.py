@@ -1,92 +1,88 @@
-from .get_data import get_data_chart, get_data_chart3, get_data_chart4
-from etc.docx_export import PersonalReport
+from .get_data import *
 
 
-config = {
-    'product': 'GBS',
-    'class': PersonalReport,
-    'highchart_config_file': 'gbs_config.py',
-    
-    'docx_template_path': 'media/docx',
-    'docx_template_name': 'Personal Report Template - NEW FORMAT - 10M.docx',
+general_config = {
+    'docx_template_name': 'PersonalReportTemplate_V1',
     
     'temp_files_location': {
         'settings': 'etc/temp/learner_chart_settings/',
         'images': 'etc/temp/chart_images/'
     },
     
-    'output_file_location': 'media/docx'
+    'output_file_location': 'media/docx',
+    'extra_images_location': 'media/img'
 }
 
-product = {
+hc_config = {
     'extra_images_to_replace': {
-        'cert': 'Picture 15'
+        'cert': {
+            'name': 'cert',
+            'data': get_learner_certificate
+        }
     },
     
     'charts': {
-        'c2_module_scores': {
-            'settings_files': {
-                'hc_render_file': {                                             
-                    'template_path': 'etc/highchart_render_settings',           # 'gbs/etc/highchart_render_settings',
-                    'template_name': 'chart1SettingsGeneral.json',
-                    'data': get_data_chart
-                },
-                'hc_callback_file': None 
-            },
-            'image_to_replace': 'Picture 3'
-        },
-        
-        'chart2': {
+        'c1_global_score': {
             'settings_files': {
                 'hc_render_file': {
-                    'template_path': 'etc/highchart_render_settings',
-                    'template_name': 'chart2SettingsGeneral.json',
-                    'data': get_data_chart
-                },
-                'hc_callback_file': {
-                    'template_path': 'etc/highchart_callback_settings',
-                    'template_name': 'grouped-categories.js',
-                    'data': None
-                },
-            },
-            'image_to_replace': 'Picture 1'
-        },
-        
-        'chart3': {
-            'settings_files': {
-                'hc_render_file': {
-                    'template_path': 'etc/highchart_render_settings',
-                    'template_name': 'chart3SettingsGeneral.json',
-                    'data': get_data_chart3
-                },
-                'hc_callback_file': {
-                    'template_path': 'etc/highchart_callback_settings',
-                    'template_name': 'grouped-categories.js',
-                    'data': None
-                },
-            },
-            'image_to_replace': 'Picture 2'
-        },
-        
-        'chart4': {
-            'settings_files': {
-                'hc_render_file': {
-                    'template_path': 'etc/highchart_render_settings',
+                    'template_path': 'etc/highchart_render_settings/gbs',
                     'template_name': 'chart4SettingsGeneral.json',
-                    'data': get_data_chart4 
+                    'data': get_perf_data 
                 },
                 'hc_callback_file': {
                     'template_path': 'etc/highchart_callback_settings',
                     'template_name': 'chart4RenderSettings.js',
-                    'data': get_data_chart4
+                    'data': get_perf_data
                 },
             },
-            'image_to_replace': 'Picture 6'
+            'image_to_replace': 'global_score'
         },
         
+        'c2_module_scores': {
+            'settings_files': {
+                'hc_render_file': {                                             
+                    'template_path': 'etc/highchart_render_settings/gbs',           
+                    'template_name': 'chart1SettingsGeneral.json',
+                    'data': get_module_scores_data
+                },
+                'hc_callback_file': None 
+            },
+            'image_to_replace': 'module_scores'
+        },
+        
+        'c3_subject_scores': {
+            'settings_files': {
+                'hc_render_file': {
+                    'template_path': 'etc/highchart_render_settings/gbs',
+                    'template_name': 'chart2SettingsGeneral.json',
+                    'data': get_subject_scores_data
+                },
+                'hc_callback_file': {
+                    'template_path': 'etc/highchart_callback_settings',
+                    'template_name': 'grouped-categories.js',
+                    'data': None
+                },
+            },
+            'image_to_replace': 'subject_scores'
+        },
+        
+        'c4_gap_to_goal': {
+            'settings_files': {
+                'hc_render_file': {
+                    'template_path': 'etc/highchart_render_settings/gbs',
+                    'template_name': 'chart3SettingsGeneral.json',
+                    'data': get_gap_data
+                },
+                'hc_callback_file': {
+                    'template_path': 'etc/highchart_callback_settings',
+                    'template_name': 'grouped-categories.js',
+                    'data': None
+                },
+            },
+            'image_to_replace': 'gap_to_goal'
+        },
+        
+        
+        
     },
-    
-    
-    
-    
 }
