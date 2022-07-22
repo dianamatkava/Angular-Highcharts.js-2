@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,EAAE,CAAC;EACD,SAAS,EAAE,IAAI;EACf,KAAK,EAAE,IAAI;EACX,WAAW,EAAE,IAAI;EACjB,WAAW,EAAE,IAAI;CAAG",
+    "sources": [
+        "pdf.component.sass"
+    ],
+    "names": [],
+    "file": "pdf.component.css"
+}

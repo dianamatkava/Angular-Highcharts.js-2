@@ -75,6 +75,18 @@ export class NewJavaComponent implements OnInit {
     }
   }
 
+  public functionPlotBandVertical_gbs_1(chart: any) {
+    var plotBands = chart.xAxis[0].plotLinesAndBands;
+    for (var i in plotBands) {
+        var d = plotBands[i].svgElem.d;
+        var dArray = d.split(' ');
+        var rect = {x: dArray[1], y: dArray[5], width: 165, height: 80};
+        if (parseFloat(i) % 2 != 0) {
+          chart.renderer.rect(rect.x, rect.y, rect.width, rect.height).attr({fill: '#FFF8E4'}).add();
+        }
+    }
+  }
+
   public functionPlotBandHorizontal(chart: any) {
 				var plotBands = chart.xAxis[0].plotLinesAndBands;
 				for (var i in plotBands) {
@@ -86,6 +98,18 @@ export class NewJavaComponent implements OnInit {
 					}
         }
 		}
+
+  public functionPlotBandHorizontal_gbs_1(chart: any) {
+    var plotBands = chart.xAxis[0].plotLinesAndBands;
+    for (var i in plotBands) {
+      var d = plotBands[i].svgElem.d;
+      var dArray = d.split(' ');
+      var rect = {x: 25, y: dArray[5], width: 700, height: 150};
+      if (parseFloat(i) % 2 != 0) {
+        chart.renderer.rect(rect.x, rect.y, rect.width, rect.height).attr({fill: '#FFF8E4'}).add();
+      }
+    }
+  }
 
   private getRandomList(min: number, max: number, length:number): any[] {
 
@@ -297,6 +321,7 @@ export class NewJavaComponent implements OnInit {
         	name: "<b>Collaboration &</b><br/><b>Teamwork</b>",
           categories: ["What is collaboration and teamwork<br/>& what makes a good team player", "How to be a collaborative team member", "Understanding affinity bias and<br/>the importance of inclusion"]
         }],
+        
         labels: {
         	rotation: 0,
           style: {
@@ -388,6 +413,150 @@ export class NewJavaComponent implements OnInit {
     this.functionPlotBandHorizontal(chart)
   }
 
+
+  private personalChart2_gbs1(): void {
+
+    var chart = Highcharts.chart('chart2_gbs1', {
+
+      chart: {
+        type: 'bar',
+        width: 934,
+	  	  height: 1160
+    },
+    title: {
+        text: ''
+    },
+    xAxis: {
+        tickWidth:0,
+        categories: [ {
+        	name: "<b>Self-Awareness</b>",
+          categories: ["Why self-awareness is critical to<br/>every professional", "How to be more self-aware", "Why a global awareness is so important"],
+        }, {
+        	name: "<b>Communication</b>",
+          categories: ["What is communication, why it's important", "How to communicate", "Effective written communcation"]
+        }, {
+        	name: "<b>Time</b><br/><b>Management</b>",
+          categories: ["Awareness of time management, why it's necessary", "Understanding prioritization", "How to manage interruptions"]
+        }, {
+        	name: "<b>How to Sell</b>",
+          categories: ["What is sales and how to sell", "The sales process, and why all team<br/>members need to understand it", "How to close sales and deal with objections"]
+        }, {
+        	name: "<b>How to say no</b>",
+          categories: ["Why it's important to be able to say no", "How to say no", "What saying no means for a professional"]
+        }, {
+        	name: "<b>Effective</b><br/><b>Meetings</b>",
+          categories: ["Why meetings go wrong", "Rules of engagement during meetings", "How to prepare for a meeting and<br/>follow-up after one"]
+        }, {
+        	name: "<b>Critical Thinking</b>",
+          categories: ["Why critical thinking is important", "How to apply critical thinking", "Situational awareness and applying<br/>critical thinking in real time"]
+        }, {
+        	name: "<b>Planning &</b><br/><b>Agility</b>",
+          categories: ["Why planning and agility are important", "Understanding plans are nothing,<br/>planning is everything & how to plan", "How to implement agility in an organization"]
+        }, {
+        	name: "<b>Professionalism</b>",
+          categories: ["What is professionalism", "Understanding and applying attention<br/>to detail and ownership", "Understanding and applying initiative"]
+        }, {
+        	name: "<b>Collaboration &</b><br/><b>Teamwork</b>",
+          categories: ["What is collaboration and teamwork<br/>& what makes a good team player", "How to be a collaborative team member", "Understanding affinity bias and<br/>the importance of inclusion"]
+        }],
+        labels: {
+        	rotation: 0,
+          style: {
+            fontFamily: 'Arial',
+            fontSize: '14px',
+            overflow: 'justify',
+            textOverflow: 'none',
+          }
+        },
+
+        plotBands:[
+          {"color":"#ffffff","from":-1,"to":2.5},
+          {"color":"#FFF8E4","from":2.5,"to":5.5},
+          {"color":"#ffffff","from":5.5,"to":8.5},
+          {"color":"#FFF8E4","from":8.5,"to":11.5},
+          {"color":"#ffffff","from":11.5,"to":14.5},
+          {"color":"#FFF8E4","from":14.5,"to":17.5},
+          {"color":"#ffffff","from":17.5,"to":20.5},
+        ]
+    },
+    yAxis: {
+        min: 0,
+        max: 100,
+        title: {
+            text: 'Percent (%)',
+            style: {
+			    	fontFamily: 'Arial',
+          	fontSize: '14px'
+          	}
+        },
+        labels: {
+			style: {
+				fontFamily: 'Arial',
+          		fontSize: '14px'
+			}
+        }
+    },
+    credits: false,
+    plotOptions: {
+      series: {
+        borderWidth: 0,
+        stacking: 'normal'
+        },
+        bar: {
+        zones: [{
+          value: 40,
+          color: '#f08c4a'
+        },{
+          value: 75,
+          color: '#92d050'
+        }, {
+          color: '#00b050'
+        }]
+        }
+    },
+    legend: {
+        symbolHeight: 16,
+        symbolWidth: 16,
+        itemStyle: {
+          fontFamily: 'Arial',
+          fontSize: '16px',
+          color: '#787878',
+          fontWeight: 'asd'
+        }
+    },
+    series: [{
+        type: 'bar',
+        name: 'Above 75%',
+        data: this.getRandomList(60, 100, 30),
+        color: '#00b050'
+      }, {
+    		id: '1',
+        type: 'bar',
+        name: 'Above 40%',
+        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        color: '#92d050'
+      }, {
+        type: 'column',
+        idOfLinkedSeries: '1',
+        name: 'Below 40%',
+        color: '#f08c4a'
+      }, {
+        type: 'spline',
+        name: 'Cohort Average',
+        data: this.getRandomList(60, 100, 30),
+        color: '#cccccc'
+      }
+   ],
+   exporting: {
+		sourceWidth: 934,
+		sourceHeight: 1160,
+		scale: 1,
+		enabled: false
+   }
+
+    } as any)
+    this.functionPlotBandHorizontal_gbs_1(chart)
+  }
 
 
 
@@ -514,6 +683,118 @@ export class NewJavaComponent implements OnInit {
 
     } as any)
     this.functionPlotBandVertical(chart)
+  }
+
+
+  private personalChart3_gbs1(): void {
+    var chart = Highcharts.chart('chart3_gbs1', {
+
+      chart: {
+        type: 'column',
+    },
+    title: {
+        text: ''
+    },
+  xAxis: {
+      categories: [ {
+          name: "Self-<br/>Awareness",
+        categories: ["Pre", "Post"]
+      }, {
+          name: "Communication",
+        categories: ["Pre", "Post"]
+      }, {
+          name: "Time<br/>Management",
+        categories: ["Pre", "Post"]
+      }, {
+          name: "How to Sell",
+        categories: ["Pre", "Post"]
+      }, {
+          name: "How to Say<br/>No",
+        categories: ["Pre", "Post"]
+      }, {
+          name: "Effective<br/>Meetings",
+        categories: ["Pre", "Post"]
+      }],
+      labels: {
+          rotation: 0,
+          style: {
+              fontFamily: 'Arial',
+                color: '#787878',
+              fontSize: '14px',
+              textOverflow: 'none'
+          }
+      },
+      lineWidth: 0,
+      "plotBands":[{"color":"#ffffff","from":-0.5,"to":1.5},{"color":"#FFF8E4","from":1.5,"to":3.5},{"color":"#ffffff","from":3.5,"to":5.5},{"color":"#FFF8E4","from":5.5,"to":7.5},{"color":"#ffffff","from":7.5,"to":9.5},{"color":"#FFF8E4","from":9.5,"to":11.5},{"color":"#ffffff","from":11.5,"to":13.5},{"color":"#FFF8E4","from":13.5,"to":15.5},{"color":"#ffffff","from":15.5,"to":17.5},{"color":"#FFF8E4","from":17.5,"to":19.5}]
+ },
+  yAxis: {
+      min: 0,
+      max: 5,
+      title: {
+          text: ''
+      },
+      labels: {
+          style: {
+              fontFamily: 'Arial',
+              color: '#787878',
+              fontSize: '14px',
+              textOverflow: 'none'
+          }
+      },
+      allowDecimals: false,
+      gridLineColor: '#e7e6e6'
+  },
+  credits: false,
+  plotOptions: {
+      series: {
+          stacking: 'normal',
+          borderWidth: 0
+      }
+  },
+  legend: {
+      symbolHeight: 16,
+      symbolWidth: 16,
+      itemStyle: {
+          fontFamily: 'Arial',
+          fontSize: '16px',
+          color: '#787878',
+          fontWeight: 'asd'
+      },
+      reversed: true
+  },
+    series: [
+    	{
+      	type: 'column',
+      	name: 'Gap to Goal',
+        data: [1, 0, 2, 1, 1, 0, 1, 0, 1, 0, 2, 1],
+        color: '#edc17c'
+      }, {
+      	type: 'column',
+      	name: 'Increase in Self Rating',
+        data: [0, 5, 0, 4, 0, 5, 0, 5, 0, 5, 0, 4],
+        color: '#00b050'
+      }, {
+      	type: 'column',
+      	name: 'Drop in Self Rating',
+        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        color: '#92d050'
+      }, {
+    		id: '1',
+        type: 'column',
+        name: 'Current Rating',
+        data: [4, 0, 3, 0, 4, 0, 4, 0, 3, 0, 3, 0],
+        color: '#cccccc'
+		}
+	],
+	exporting: {
+		sourceWidth: 960,
+		sourceHeight: 720,
+		scale: 1,
+		enabled: false
+	}
+
+    } as any)
+    this.functionPlotBandVertical_gbs_1(chart)
   }
 
 
@@ -1264,6 +1545,8 @@ export class NewJavaComponent implements OnInit {
     this.personalChart2();
     this.personalChart3();
     this.personalChart4();
+    this.personalChart3_gbs1();
+    this.personalChart2_gbs1()
     // this.personalChart1_7();
     // this.personalChart2_7();
     // this.personalChart3_7();
