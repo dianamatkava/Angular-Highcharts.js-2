@@ -4,13 +4,7 @@ from .get_data import *
 general_config = {
     'docx_template_name': 'PersonalReportTemplate_V1',
     
-    'temp_files_location': {
-        'settings': 'etc/temp/learner_chart_settings/',
-        'images': 'etc/temp/chart_images/'
-    },
     
-    'output_file_location': 'media/docx',
-    'extra_images_location': 'media/img'
 }
 
 hc_config = {
@@ -81,8 +75,14 @@ hc_config = {
             },
             'image_to_replace': 'gap_to_goal'
         },
-        
-        
-        
     },
+    
+    # default config settings
+    'temp_files_location': {
+        'settings': 'etc/temp/learner_chart_settings/',
+        'images': 'etc/temp/chart_images/'
+    },
+    
+    'output_file_location': 'media/docx',
+    'extra_images_location': 'media/img',
 }

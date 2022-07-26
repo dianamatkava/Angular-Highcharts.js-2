@@ -1,14 +1,202 @@
 import os
+import pathlib
 import re
+import json
 import logging
 import importlib
-
+from abc import ABC, abstractmethod
 from docxtpl import DocxTemplate
 
-from etc.config.docx_templates import templates
+from etc.config.config_map import template_conf, chart_conf
 from .utils import generate_path
+from etc.config.get_data import *
+
 
 logger = logging.getLogger(__name__)
+
+
+
+
+class ReportConfig:
+    
+    def __init__(self, config):
+        
+        self.rpt_data = rpt_settings['data'][config['data_type']][config['data_strategy']]
+        self.rpt_chart_type = rpt_settings['chart_type'][config['chart_type']]
+        self.rpt_chart_output = rpt_settings['chart_output'][config['chart_output']]
+        
+        
+        self.lookup_values = config['lookup_values']
+        self.chart_config_id = config['chart_config_id']
+        self.template = config['template']
+        
+        self.template_full_path = generate_path(
+            template_conf[config['template']]['path'], 
+            [template_conf[config['template']]['name']]
+        )
+        
+    
+# Chart Abstraction
+class ReportChart(ABC):
+    @abstractmethod
+    def prepare_charts(self, data: dict):
+        """ Adds data to charts settings """                                                                     
+        
+    @abstractmethod
+    def generate_charts(self, settings: dict):
+        """ Generetes charts """
+
+
+# Chart types
+class GenereteHighchart(ReportChart):
+    '''Returns ready to use chart setting (poopulated with data) 
+        -->> dicit(apth to chart settings (json), path to dependensies '''
+    def prepare_charts(data: dict):
+        return {'path to chart settings': f'GenereteHighchart: {data}'}    
+    
+    
+class GenereteBokehChart(ReportChart):
+    '''Returns ready to use chart setting (poopulated with data) 
+        -->> dicit(apth to chart settings (json), path to dependensies '''
+    def prepare_charts(data: dict):
+        return {'path to chart settings': f'GenereteBokehChart: {data}'}    
+    
+
+# Chart output types    
+class GenerateChartJSONType(ReportChart):
+    ''' Returns chart settings in json format '''
+    def generate_charts(settings: dict):
+        return {'path to chart settings': f'img with data GenerateChartJSONType: {settings}'}  
+
+
+class GenerateChartImage(ReportChart):
+    ''' Returns dict with path to images '''
+    def generate_charts(settings: dict):
+        return {'path to chart images': f'img with data GenerateChartImage: {settings}'} 
+    
+
+# Strategy Abstraction
+class Strategy(ABC):
+    @abstractmethod
+    def generate_data(self, **kwargs):
+        '''Abstract method to generate data'''
+        
+        
+class GenerateQueryCohortReport(Strategy):
+    
+    def generate_data(self, **kwargs):
+        '''Gets full data for cohort report'''
+        return {'GenerateQueryCohortReport': f'{kwargs["cohort"]}', 'TABLE_NAME': {'VARIABLE1': 'value', 'VARIABLE2': 'value', 'TEMPLATE': {'TEMPLATE_VARIABLE': 'value'}}}
+    
+    
+class GenerateQueryPersonalReport(Strategy):
+    
+    def generate_data(self, **kwargs):
+        # ideally need to create query which will 
+        # contain 1/2 big tables with all needed entries 
+        # i just use already written functions
+        data = {
+            'charts_data': {
+                'module_scores_data': get_module_scores_data(kwargs['cohort'], kwargs['learner']),
+                'subject_scores_data': get_subject_scores_data(kwargs['cohort'], kwargs['learner']),
+                'gap_data': get_gap_data(kwargs['cohort'], kwargs['learner']),
+                'c1_global_score': get_perf_data(kwargs['cohort'], kwargs['learner']),
+                'cert': get_learner_certificate(),
+            },
+            'template_data': {
+                # needs to be improved
+                'CERT': get_learner_certificate(),
+                
+            }
+        }
+        '''Gets full data for personal report'''
+        return data
+
+
+class GetXLSDataCohortReport(Strategy):
+    
+    def generate_data(self, **kwargs):
+        '''Gets full data for cohort report from exel'''
+        return {'GetXLSDataCohortReport': f'{kwargs["cohort"]}', 'TABLE_NAME': {'VARIABLE1': 'value', 'VARIABLE2': 'value', 'TEMPLATE': {'TEMPLATE_VARIABLE': 'value'}}}
+    
+    
+class GetXLSDataPersonalReport(Strategy):
+    def generate_data(self, **kwargs):
+        '''Gets full data for cohort report from exel'''
+        return {'GetXLSDataPersonalReport': f'{kwargs["cohort"]}', 'TABLE_NAME': {'VARIABLE1': 'value', 'VARIABLE2': 'value', 'TEMPLATE': {'TEMPLATE_VARIABLE': 'value'}}}
+    
+
+# Data Abstraction
+class ReportData(ABC):   
+    data: dict
+    
+    @abstractmethod
+    def get_initial_data(self, strategy: Strategy = None, **kwargs):
+        """ Returns full data for report as dict"""
+    
+    def update_data(self, data: dict):
+        self.data.update(data)
+        return self.data
+    
+
+class GenerateReportingData(ReportData):
+    ''' create get_data_for_chart with some strategies: personal_rpt, cohort_rpt_V1, cohort_rpt_V2 which take **kwargs (lookup parametrs)
+    all of strategies has the same rule of how to return the dict
+    cohort_rpt_V2 -->> dict: {'TABLE_NAME': 'value/s', 'TEMPLATE': value/s}
+    In a chart settings we need to spesify a data keyword wich is <TABLE_NAME>
+    data['TABLE_NAME'] will return dict with KEYWORD/S to be replaced in chart's settings.json '''
+    
+    def get_initial_data(self, strategy: Strategy = None, **kwargs):
+        self.data = strategy.generate_data(**kwargs)
+        return self.data
+    
+    
+    
+class ReportTemplateClass:
+    data: dict
+    template: str
+    
+    def __init__(self, data, template):
+        self.data = data
+        self.template = template
+    
+    def generate_docx(self):
+        ''' render template '''
+        pass
+    
+class ReportGenerate:
+    # main func will be here
+   pass
+    
+
+
+
+
+
+# Factory settings
+rpt_settings = {
+    'data': {
+        'db': {
+            'cohort_report': GenerateQueryCohortReport(),
+            'personal_report': GenerateQueryPersonalReport()
+        },
+        'exel': {
+            'cohort_report': GetXLSDataCohortReport(),
+            'personal_report': GetXLSDataPersonalReport()
+        },
+    },
+    'chart_type': {
+        'highchart': GenereteHighchart,   # >> will take data: ready to use: dict()
+        'bokeh': GenereteBokehChart       # >> will take data: ready to use: dict()
+    },
+    'chart_output': {
+        'json': GenerateChartJSONType,  # takes ready to use chart settings in json format. Returns dict with path to json files
+        'img': GenerateChartImage       # takes ready to use chart settings in json format. Returns dict with path to img
+    }
+}
+
+
+
 
 
 class HighchartExportServer():

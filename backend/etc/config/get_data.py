@@ -1,8 +1,6 @@
 # from personal_report.models import UserData
 import itertools
-import os
 import random
-from sqlite3 import dbapi2
 import pandas as pd
 from functools import partial
 from personal_report.utils import *

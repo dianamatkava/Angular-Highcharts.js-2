@@ -20,5 +20,5 @@ from personal_report.views import python_docs
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
-    path('docx', python_docs),
+    path('', python_docs),
 ]
